@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+
+  counter(n: number): number[] {
+    return Array.from({ length: n }, (_, index) => index);
+  }
 }
