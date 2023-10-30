@@ -24,6 +24,7 @@ import { ProfileCardsComponent } from './components/profile-cards/profile-cards.
 import { RequestsComponent } from './pages/dashboard/sections/requests/requests.component';
 import { DeleteActivityComponent } from './pages/dashboard/sections/delete-activity/delete-activity.component';
 import { PropsitionsComponent } from './pages/dashboard/sections/propsitions/propsitions.component';
+import { MembersComponent } from './pages/dashboard/sections/members/members.component';
 
 
 
@@ -42,7 +43,8 @@ import { PropsitionsComponent } from './pages/dashboard/sections/propsitions/pro
     ProfileCardsComponent,
     RequestsComponent,
     DeleteActivityComponent,
-    PropsitionsComponent
+    PropsitionsComponent,
+    MembersComponent
   ],
   imports: [
     BrowserModule,

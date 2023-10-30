@@ -1,1 +1,3 @@
-<p>delete-activity works!</p>
+<div class="w-full flex flex-row flex-wrap ml-64">
+  <app-activity-card [actionButtonLabel2]="'Delete'" [purpose]="'Delete'" (onActionButtonClick2)="delete()" *ngFor="let index of counter(10)"></app-activity-card>
+</div>

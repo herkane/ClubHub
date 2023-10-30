@@ -9,4 +9,12 @@ export class RequestsComponent {
   counter(n: number): number[] {
     return Array.from({ length: n }, (_, index) => index);
   }
+
+  onAcceptMember() {
+    alert("Member Accepted")
+  }
+
+  onRefuseMember() {
+    alert("Member Refused")
+  }
 }

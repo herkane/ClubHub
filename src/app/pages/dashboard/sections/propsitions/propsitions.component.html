@@ -1,1 +1,3 @@
-<p>propsitions works!</p>
+<div class="w-full flex flex-row flex-wrap ml-64">
+  <app-activity-card [actionButtonLabel]="'Accept'" [actionButtonLabel2]="'Refuse'" [purpose]="'Proposition'" (onActionButtonClick)="accept()" (onActionButtonClick2)="refuse()" *ngFor="let index of counter(10)" #childElement></app-activity-card>
+</div>

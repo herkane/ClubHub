@@ -9,6 +9,7 @@ import {NewActivityComponent} from "./pages/dashboard/sections/new-activity/new-
 import {RequestsComponent} from "./pages/dashboard/sections/requests/requests.component";
 import {DeleteActivityComponent} from "./pages/dashboard/sections/delete-activity/delete-activity.component";
 import {PropsitionsComponent} from "./pages/dashboard/sections/propsitions/propsitions.component";
+import {MembersComponent} from "./pages/dashboard/sections/members/members.component";
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -18,10 +19,10 @@ const routes: Routes = [
     children: [
       { path: '', component: ActivitiesComponent },
       { path: 'new-activity', component: NewActivityComponent },
-      { path: 'delete-activity', component: ActivitiesComponent },
+      { path: 'delete-activity', component: DeleteActivityComponent },
       { path: 'requests', component: RequestsComponent },
       { path: 'propositions', component: PropsitionsComponent },
-      { path: 'members', component: RequestsComponent }
+      { path: 'members', component: MembersComponent }
     ]
   }
 ];
