@@ -1,4 +1,4 @@
-import {User} from "../user.model";
+import {User} from "../user.interface";
 import {createReducer, on} from "@ngrx/store";
 import {loadUser, login, logout} from "../actions/user.actions";
 

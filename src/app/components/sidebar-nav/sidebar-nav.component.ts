@@ -39,6 +39,7 @@ export class SidebarNavComponent {
             break;
           default:
             this.sharedService.changeSection('');
+            break;
         }
       }
     )

@@ -1,24 +1,36 @@
-import {Component, ElementRef, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ActivityCardComponent} from "../../../../components/activity-card/activity-card.component";
+import {ActivitiesService} from "../../../../activities.service";
 
 @Component({
   selector: 'app-propsitions',
   templateUrl: './propsitions.component.html',
   styleUrls: ['./propsitions.component.css']
 })
-export class PropsitionsComponent {
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+export class PropsitionsComponent implements OnInit{
+  constructor(private activitiesService: ActivitiesService) {}
 
 
-  counter(n: number): number[] {
-    return Array.from({ length: n }, (_, index) => index);
-  }
+  propositions : any
 
   accept() {
-    alert("Activity Accepted")
+    alert("ActivityInterface Accepted")
   }
 
   refuse() {
-    alert("Activity Refused")
+    alert("ActivityInterface Refused")
   }
+
+  ngOnInit(): void {
+    this.activitiesService.loadPropositions().subscribe((data) => {
+      this.propositions = data
+    },
+      (error) => {
+        console.log("Error loading propositions")
+        console.log(error)
+      }
+    )
+  }
+
+
 }

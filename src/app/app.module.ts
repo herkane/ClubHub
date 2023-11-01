@@ -25,6 +25,11 @@ import { RequestsComponent } from './pages/dashboard/sections/requests/requests.
 import { DeleteActivityComponent } from './pages/dashboard/sections/delete-activity/delete-activity.component';
 import { PropsitionsComponent } from './pages/dashboard/sections/propsitions/propsitions.component';
 import { MembersComponent } from './pages/dashboard/sections/members/members.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { SinglePostComponent } from './components/single-post/single-post.component';
+import {TruncateWordsPipe} from "./truncate-word.pipe";
+import { RequestSentComponent } from './pages/request-sent/request-sent.component';
 
 
 
@@ -44,7 +49,12 @@ import { MembersComponent } from './pages/dashboard/sections/members/members.com
     RequestsComponent,
     DeleteActivityComponent,
     PropsitionsComponent,
-    MembersComponent
+    MembersComponent,
+    SignupComponent,
+    SignupFormComponent,
+    SinglePostComponent,
+    TruncateWordsPipe,
+    RequestSentComponent
   ],
   imports: [
     BrowserModule,

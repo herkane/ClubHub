@@ -1,10 +1,163 @@
 {
-  "users": [
+  "members": [
     {
       "id": 1,
       "name": "Herkane Achraf",
-      "email": "herkane2014@gmail.com",
+      "email": "achraf@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": 1,
+      "name": "Herkane Yassir",
+      "email": "yassir@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": 1,
+      "name": "Herkane Mbarek",
+      "email": "mbarek@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": 1,
+      "name": "Chaib Rafik",
+      "email": "rafik@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": 1,
+      "name": "Elhlaissi Hicham",
+      "email": "hicham@gmail.com",
       "password": "123456"
     }
-  ]
+  ],
+  "login": [
+    {
+      "id": 1,
+      "name": "Admin Admin",
+      "email": "admin@admin.com",
+      "password": "password"
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "title": "Hiking Trip",
+      "content": "Join us for an adventurous hike in the mountains.",
+      "participants": "John, Sarah, Emily",
+      "participantsNumber": "3",
+      "image": "hiking.jpg",
+      "eventDate": "2023-11-10",
+      "participantsLimit": 35
+    },
+    {
+      "id": 2,
+      "title": "Beach Cleanup",
+      "content": "Help us keep the beach clean and beautiful.",
+      "participants": "David, Lisa, Michael",
+      "participantsNumber": "3",
+      "image": "beach-cleanup.jpg",
+      "eventDate": "2023-11-15",
+      "participantsLimit": 35
+    },
+    {
+      "id": 3,
+      "title": "Cooking Class",
+      "content": "Learn to cook delicious dishes with our expert chefs.",
+      "participants": "Alex, Emma, Olivia",
+      "participantsNumber": "3",
+      "image": "cooking-class.jpg",
+      "eventDate": "2023-11-20",
+      "participantsLimit": 35
+    },
+    {
+      "id": 4,
+      "title": "Art Exhibition",
+      "content": "Discover the beauty of art at our exhibition.",
+      "participants": "Sophia, James, Ava",
+      "participantsNumber": "3",
+      "image": "art-exhibition.jpg",
+      "eventDate": "2023-11-25",
+      "participantsLimit": 35
+    },
+    {
+      "id": 5,
+      "title": "Music Concert",
+      "content": "Enjoy a night of live music with various bands.",
+      "participants": "Liam, Mia, Noah",
+      "participantsNumber": "3",
+      "image": "music-concert.jpg",
+      "eventDate": "2023-11-30",
+      "participantsLimit": 35
+    },
+    {
+      "id": 6,
+      "title": "Fitness Workshop",
+      "content": "Get fit and healthy with our fitness experts.",
+      "participants": "Ella, William, Grace",
+      "participantsNumber": "3",
+      "image": "fitness-workshop.jpg",
+      "eventDate": "2023-12-05",
+      "participantsLimit": 35
+    },
+    {
+      "id": 7,
+      "title": "Gardening Club",
+      "content": "Join our gardening club and cultivate beautiful gardens.",
+      "participants": "Benjamin, Charlotte, Henry",
+      "participantsNumber": "3",
+      "image": "gardening-club.jpg",
+      "eventDate": "2023-12-10",
+      "participantsLimit": 35
+    },
+    {
+      "id": 8,
+      "title": "Tech Conference",
+      "content": "Explore the latest technology trends at our conference.",
+      "participants": "Aiden, Harper, Jackson",
+      "participantsNumber": "3",
+      "image": "tech-conference.jpg",
+      "eventDate": "2023-12-15",
+      "participantsLimit": 35
+    },
+    {
+      "id": 9,
+      "title": "Book Reading",
+      "content": "Discover the world of literature through our book reading session.",
+      "participants": "Sofia, Michael, Amelia",
+      "participantsNumber": "3",
+      "image": "book-reading.jpg",
+      "eventDate": "2023-12-20",
+      "participantsLimit": 35
+    },
+    {
+      "id": 10,
+      "title": "Movie Night",
+      "content": "Enjoy a movie night with friends and family.",
+      "participants": "Ethan, Harper, Abigail",
+      "participantsNumber": "3",
+      "image": "movie-night.jpg",
+      "eventDate": "2023-12-25",
+      "participantsLimit": 35
+    }
+  ],
+  "register": [
+    {
+      "name": "Ralph",
+      "email": "peroxelyc@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "phone": "+1 (699) 523-3484",
+      "image": "The image works i just needed to comment it for long lines reasons",
+      "id": 1
+    },
+    {
+      "name": "Ginger",
+      "email": "pamymugoxe@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "phone": "+1 (457) 934-4246",
+      "image": "The image works i just needed to comment it for long lines reasons",
+      "id": 2
+    }
+  ],
+  "propositions" : []
 }

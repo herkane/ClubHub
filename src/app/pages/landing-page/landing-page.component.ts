@@ -6,5 +6,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent {
+  loginStyle: any;
+  signupStyle: any;
 
+  constructor() {
+    this.loginStyle = {
+      'visibility': '',
+    }
+    this.signupStyle = {
+      'display': 'none',
+    };
+  }
+
+  goToSignUp() {
+    this.loginStyle = {
+      'display': 'none',
+    }
+    this.signupStyle = {
+      'visibility': '',
+    };
+  }
+
+  goToLogin() {
+    this.loginStyle = {
+      'visibility': '',
+    }
+    this.signupStyle = {
+      'display': 'none',
+    };
+  }
 }

@@ -1,3 +1,3 @@
-<div class="w-full flex flex-row flex-wrap ml-64">
-  <app-activity-card [actionButtonLabel2]="'Delete'" [purpose]="'Delete'" (onActionButtonClick2)="delete()" *ngFor="let index of counter(10)"></app-activity-card>
+<div class=" flex flex-row flex-wrap ml-64">
+  <app-activity-card [routeLink]="'../delete-activity'" [activity]="index" [actionButtonLabel2]="'Delete'" [purpose]="'Delete'" (onActionButtonClick2)="delete()" *ngFor="let index of activities"></app-activity-card>
 </div>

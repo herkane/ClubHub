@@ -1,18 +1,17 @@
-import {Component, ElementRef, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ActivityCardComponent} from "../../../../components/activity-card/activity-card.component";
+import {ActivitiesService} from "../../../../activities.service";
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
   styleUrls: ['./activities.component.css']
 })
-export class ActivitiesComponent {
+export class ActivitiesComponent implements OnInit{
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private activityService : ActivitiesService) {}
 
 
-  counter(n: number): number[] {
-    return Array.from({ length: n }, (_, index) => index);
-  }
+  activities : any
 
   onParticipateClick(childElement: ActivityCardComponent) {
     childElement.participate()
@@ -20,6 +19,13 @@ export class ActivitiesComponent {
 
   onCancelClick(childElement: ActivityCardComponent) {
     childElement.cancel()
+  }
+
+  ngOnInit(): void {
+    this.activityService.loadActivities().subscribe((data) => {
+      console.log(data)
+      this.activities = data
+    })
   }
 
 }

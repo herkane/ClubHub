@@ -1,3 +1,3 @@
-<div class="w-full flex flex-row flex-wrap ml-64">
-  <app-activity-card [actionButtonLabel]="'Participate'" [actionButtonLabel2]="'Cancel'" (onActionButtonClick2)="onCancelClick(childElement)" (onActionButtonClick)="onParticipateClick(childElement)" *ngFor="let index of counter(10)" #childElement></app-activity-card>
+<div class=" flex flex-row flex-wrap ml-64">
+  <app-activity-card [routeLink]="'../dashboard'" [activity]="index" [actionButtonLabel]="'Participate'" [actionButtonLabel2]="'Cancel'" (onActionButtonClick2)="onCancelClick(childElement)" (onActionButtonClick)="onParticipateClick(childElement)" *ngFor="let index of activities" #childElement></app-activity-card>
 </div>
