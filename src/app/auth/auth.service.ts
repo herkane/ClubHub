@@ -1,40 +1,53 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable, tap} from 'rxjs';
 import {User} from "../../models/user.interface";
+import {ApiService} from "../api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = 'http://localhost:5000';
+  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  private readonly TOKEN_NAME = 'auth';
+  isLoggedIn$ = this._isLoggedIn$.asObservable();
+  user: User | null;
+  customTokenAdmin = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInZpcCIsIm1lbWJlciJdfQ.7_7BqdVBEa2EOuL0QBpcBMccji-MPK3M2nHwy_qHQ_Q';
+  customTokenVip = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJ2aXAiLCJtZW1iZXIiXX0.R42lm4ipcblk_tq1wCxHa7xLwfaartNdVieEg-BAnIY';
+  customTokenMember = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJtZW1iZXIiXX0.lPXLVPvNFhutoZFFjss92f8jtANn2VgpysUVptcQlRU';
+  customTokenVisitor = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJ2aXNpdG9yIl19.rxGqMkmykIG7bKDhu4RySxbA6xpGFZZQ8Yd0zIqhnl8';
 
-  constructor(private http: HttpClient) { }
-
-  login(credentials: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/login`, credentials);
+  customToken = this.customTokenAdmin;
+  get token(): any {
+    return localStorage.getItem(this.TOKEN_NAME)
   }
 
-  storeToken(token: string): void {
-    localStorage.setItem('token', token);
+  constructor(private http: HttpClient, private apiService : ApiService) {
+    this._isLoggedIn$.next(!!this.customToken)
+    this.user = this.getUser(this.customToken);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  login(credentials: any) {
+    return this.apiService.login(credentials).pipe(
+      tap((res: any) => {
+        this._isLoggedIn$.next(true);
+        //To change after with res.token
+        localStorage.setItem(this.TOKEN_NAME, this.customToken)
+        this.user = this.getUser(this.customToken);
+      })
+    )
   }
-
-  isLoggedIn(): boolean {
-    return this.getToken() !== null;
+  private getUser(token: string): User | null {
+    if (!token) {
+      return null
+    }
+    return JSON.parse(atob(token.split('.')[1])) as User;
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-  }
-
-  async getUser() : Promise<Observable<User>> {
-    if (!this.isLoggedIn()) {
-      throw new Error('User not logged in.');
-    }
-    return this.http.get<User>(`${this.apiUrl}`);
+    localStorage.removeItem(this.TOKEN_NAME);
+    this._isLoggedIn$.next(false);
+    this.user = null;
   }
 }

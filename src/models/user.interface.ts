@@ -1,10 +1,11 @@
 // user.interface.ts
 export interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  token: string;
-  image: string;
-  phone: string;
+  id: number | null;
+  name: string | null;
+  email: string | null;
+  password: string | null;
+  token: string | null;
+  image: string | null;
+  phone: string | null;
+  roles: string[] | null;
 }

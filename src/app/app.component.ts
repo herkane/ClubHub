@@ -17,7 +17,6 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
-    console.log("Init flowbite")
     initFlowbite()
   }
 

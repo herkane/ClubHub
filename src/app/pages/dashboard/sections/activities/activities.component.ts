@@ -23,7 +23,6 @@ export class ActivitiesComponent implements OnInit{
 
   ngOnInit(): void {
     this.activityService.loadActivities().subscribe((data) => {
-      console.log(data)
       this.activities = data
     })
   }

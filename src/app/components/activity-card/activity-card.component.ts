@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivityInterface} from "../../../models/activity.interface";
 import {Router} from "@angular/router";
+import {AuthService} from "../../auth/auth.service";
+import {SharedService} from "../../SharedService";
 
 @Component({
   selector: 'app-activity-card',
@@ -17,6 +19,9 @@ export class ActivityCardComponent implements OnInit {
   counterStyle: any
   proposed_by: any;
   currentPath : any
+  memberStyle: any
+  user: any
+  currentRole: any
   @Input() activity : ActivityInterface = {} as ActivityInterface;
 
 
@@ -28,7 +33,8 @@ export class ActivityCardComponent implements OnInit {
   @Output() onActionButtonClick2 = new EventEmitter<void>();
 
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private authService: AuthService, private sharedService : SharedService) {
+  }
   participate() {
     this.participateStyle = {
       'display' : 'none'
@@ -50,6 +56,16 @@ export class ActivityCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.authService.user;
+    this.sharedService.currentRole.subscribe(
+      role => this.currentRole = role
+    )
+    if (!this.currentRole) {
+      this.memberStyle = {
+        'display': 'none'
+      };
+    }
+
     this.currentPath = this.router.url
     this.proposed_by = {
       'display': 'none'

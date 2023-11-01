@@ -1,17 +1,67 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import { SharedService } from "../../SharedService";
+import {logout} from "../../../models/actions/user.actions";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-sidebar-nav',
   templateUrl: './sidebar-nav.component.html',
   styleUrls: ['./sidebar-nav.component.css']
 })
-export class SidebarNavComponent {
+export class SidebarNavComponent implements OnInit, OnDestroy{
 
-  @Output() current_page = new EventEmitter<string>();
+  user = this.authService.user;
+  adminStyle: any
+  vipStyle: any
+  memberStyle: any
+  whatIsUser: string | undefined
 
-  constructor(private router: Router, private sharedService: SharedService) {
+
+  constructor(private router: Router, private sharedService: SharedService, private authService: AuthService) {
+  }
+
+  ngOnDestroy(): void {
+    this.sharedService.changeSection('')
+    console.log("I am on the sidebar component destroyed")
+    this.user = null;
+  }
+
+  ngOnInit(): void {
+    if (this.user?.roles?.includes('admin')) {
+      console.log("This user has an Admin role")
+      this.whatIsUser = 'admin'
+      this.sharedService.changeUserRole('admin')
+    } else if (this.user?.roles?.some((role: string) => role === 'vip')) {
+      console.log("This user has a VIP role")
+      this.whatIsUser = 'vip'
+      this.sharedService.changeUserRole('vip')
+      this.adminStyle = {
+        'display': 'none'
+      }
+    } else if (this.user?.roles?.includes('member')) {
+      console.log("This user has a Member role")
+      this.whatIsUser = 'member'
+      this.sharedService.changeUserRole('member')
+      this.vipStyle = {
+        'display': 'none'
+      }
+      this.adminStyle = {
+        'display': 'none'
+      }
+    } else {
+      console.log("This user has a Visitor role")
+      this.whatIsUser = 'visitor'
+      this.memberStyle = {
+        'display': 'none'
+      }
+      this.vipStyle = {
+        'display': 'none'
+      }
+      this.adminStyle = {
+        'display': 'none'
+      }
+    }
   }
 
   navigateTo(route: string) {
@@ -43,5 +93,12 @@ export class SidebarNavComponent {
         }
       }
     )
+  }
+
+
+  logout() {
+    this.authService.logout();
+    this.sharedService.changeSection('')
+    this.router.navigate(['/']);
   }
 }

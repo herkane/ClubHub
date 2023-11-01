@@ -2,6 +2,13 @@
   "members": [
     {
       "id": 1,
+      "name": "Admin Admin",
+      "email": "admin@admin.com",
+      "password": "admin",
+      "roles": "admin"
+    },
+    {
+      "id": 1,
       "name": "Herkane Achraf",
       "email": "achraf@gmail.com",
       "password": "123456"
@@ -31,12 +38,27 @@
       "password": "123456"
     }
   ],
-  "login": [
+  "login" : [
     {
       "id": 1,
       "name": "Admin Admin",
       "email": "admin@admin.com",
-      "password": "password"
+      "password": "admin",
+      "roles": ["admin", "member", "vip"]
+    },
+    {
+      "id": 2,
+      "name": "Vip Vip",
+      "email": "vip@vip.com",
+      "password": "vip",
+      "roles": ["vip", "member"]
+    },
+    {
+      "id": 2,
+      "name": "Member Member",
+      "email": "member@member.com",
+      "password": "member",
+      "roles": ["member"]
     }
   ],
   "activities": [

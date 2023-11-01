@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivityCardComponent} from "../activity-card/activity-card.component";
+import {SharedService} from "../../SharedService";
 
 @Component({
   selector: 'app-profile-cards',
@@ -15,8 +16,13 @@ export class ProfileCardsComponent implements OnInit{
   acceptStyle : any
   refuseStyle : any
   licenierStyle : any
+  currentRole : any
+
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
+    this.sharedService.currentRole.subscribe(role => this.currentRole = role)
+    console.log(this.currentRole)
     if (this.purpose === 'members') {
       this.acceptStyle = {
         'display' : 'none'
@@ -28,7 +34,7 @@ export class ProfileCardsComponent implements OnInit{
         'visibility' : ''
       }
     } else if (this.purpose === 'requests') {
-this.acceptStyle = {
+    this.acceptStyle = {
         'visibility' : ''
       }
       this.refuseStyle = {

@@ -13,6 +13,7 @@ import {MembersComponent} from "./pages/dashboard/sections/members/members.compo
 import {SignupComponent} from "./pages/signup/signup.component";
 import {SinglePostComponent} from "./components/single-post/single-post.component";
 import {RequestSentComponent} from "./pages/request-sent/request-sent.component";
+import {HasRolesGuard} from "./auth/has-roles.guard";
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -23,19 +24,62 @@ const routes: Routes = [
     children: [
       { path: '', component: ActivitiesComponent },
       { path: 'post/:id', component: SinglePostComponent },
-      { path: 'new-activity', component: NewActivityComponent },
-      { path: 'delete-activity/post/:id', component: SinglePostComponent },
-      { path: 'propositions/post/:id', component: SinglePostComponent },
+      {
+        path: 'new-activity',
+        component: NewActivityComponent,
+        canActivate: [HasRolesGuard],
+        data: {
+          role: 'vip',
+        }
+      },
+      {
+        path: 'delete-activity/post/:id',
+        component: SinglePostComponent,
+        canActivate: [HasRolesGuard],
+        data: {
+          role: 'admin',
+        }
+      },
+      {
+        path: 'propositions/post/:id',
+        component: SinglePostComponent,
+        canActivate: [HasRolesGuard],
+        data: {
+          role: 'admin',
+        }
+      },
       {
         path: 'delete-activity',
-        component: DeleteActivityComponent
+        component: DeleteActivityComponent,
+        canActivate: [HasRolesGuard],
+        data: {
+          role: 'admin',
+        }
       },
-      { path: 'requests', component: RequestsComponent },
+      {
+        path: 'requests',
+        component: RequestsComponent,
+        canActivate: [HasRolesGuard],
+        data: {
+          role: 'admin',
+        }
+      },
       {
         path: 'propositions',
-        component: PropsitionsComponent
+        component: PropsitionsComponent,
+        canActivate: [HasRolesGuard],
+        data: {
+          role: 'admin',
+        }
       },
-      { path: 'members', component: MembersComponent }
+      {
+        path: 'members',
+        component: MembersComponent,
+        canActivate: [HasRolesGuard],
+        data: {
+          role: 'member',
+        }
+      }
     ]
   }
 ];

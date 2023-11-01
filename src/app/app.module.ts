@@ -6,7 +6,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import {RouterOutlet} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
@@ -15,7 +15,6 @@ import { ActivityCardComponent } from './components/activity-card/activity-card.
 import { NewActivityFormComponent } from './components/new-activity-form/new-activity-form.component';
 import { StoreModule } from '@ngrx/store';
 import {AuthService} from "./auth/auth.service";
-import {AuthInterceptor} from "./auth/auth.interceptor";
 import { HttpClientModule } from '@angular/common/http';
 import {userReducer} from "../models/reducers/user.reducer";
 import { ActivitiesComponent } from './pages/dashboard/sections/activities/activities.component';
@@ -30,6 +29,9 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
 import { SinglePostComponent } from './components/single-post/single-post.component';
 import {TruncateWordsPipe} from "./truncate-word.pipe";
 import { RequestSentComponent } from './pages/request-sent/request-sent.component';
+import {FakeBackendProvider} from "./fake-backend.interceptor";
+import {AuthInterceptorProvider} from "./auth/auth.interceptor";
+import {HasRolesGuard} from "./auth/has-roles.guard";
 
 
 
@@ -63,9 +65,10 @@ import { RequestSentComponent } from './pages/request-sent/request-sent.componen
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({user : userReducer}, {})
+    StoreModule.forRoot({user: userReducer}, {}),
+    ReactiveFormsModule
   ],
-  providers: [AuthService, AuthInterceptor],
+  providers: [HasRolesGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

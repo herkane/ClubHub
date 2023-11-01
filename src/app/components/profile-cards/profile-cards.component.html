@@ -8,7 +8,7 @@
       <div class="flex mt-4 space-x-3 md:mt-6">
         <a [style]="acceptStyle" (click)="onAcceptMember.emit()" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Accepter</a>
         <a [style]="refuseStyle" (click)="onRefuseMember.emit()" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-500 hover:bg-red-700 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Refuser</a>
-        <a [style]="licenierStyle" (click)="onFireMember.emit()" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-500 hover:bg-red-700 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Licencier</a>
+        <a *ngIf="currentRole === 'admin'" [style]="licenierStyle" (click)="onFireMember.emit()" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-500 hover:bg-red-700 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Licencier</a>
       </div>
     </div>
   </div>

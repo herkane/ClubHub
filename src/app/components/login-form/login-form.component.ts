@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../../models/user.interface";
 import {Route, Router} from '@angular/router';
 import {Store} from "@ngrx/store";
@@ -24,6 +24,10 @@ export class LoginFormComponent {
   user: User = {} as User;
   result : any;
   @Output() actionButtonClick =  new EventEmitter<void>;
+  loginForm = new FormGroup({
+    email: new FormControl(null, Validators.required),
+    password: new FormControl(null, Validators.required),
+  });
 
   constructor(private router: Router, private store : Store, private authService : AuthService, private sharedService: SharedService) {
 
@@ -31,38 +35,18 @@ export class LoginFormComponent {
 
 
   handleLogin() {
-    this.loading$.next(true);
-    this.error$.next('');
-
-    const credentials = {
-      username: this.username,
-      password: this.password
-    };
-
-    this.authService.login(credentials).subscribe(
-      (data) => {
-        console.log("Data")
-        console.log(data)
-        console.log("Credentials")
-        console.log(credentials)
-        if (data.email === credentials.username && data.password === credentials.password) {
-          this.result = data;
-          console.log("Result")
-          console.log(this.result);
-          this.user = this.result.body;
-          this.store.dispatch(login({user: this.user}));
-          this.sharedService.changeSection('Tableau de bord');
-          this.router.navigate(['/dashboard']);
-          this.loading$.next(true);
-        } else {
-          this.loading$.next(true);
-          this.error$.next('Invalid username or password. Please try again.');
-        }
+    if (this.loginForm.invalid) {
+      alert('invalid form')
+      return
+    }
+    this.authService.login(this.loginForm.value).subscribe(
+      (res: any) => {
+        this.router.navigate(['/dashboard']);
+        this.sharedService.changeSection('Tableau de bord');
       },
       (error) => {
-        this.loading$.next(false);
-        this.error$.next('Invalid username or password. Please try again.');
+        alert('Invalid credentials')
       }
-    );
+    )
   }
 }
