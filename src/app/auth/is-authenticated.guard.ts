@@ -26,8 +26,11 @@ export class IsAuthenticatedGuard implements CanActivate {
     | UrlTree {
     return this.authService.isLoggedIn$.pipe(
       tap((isLoggedIn) => {
-        if (!isLoggedIn) {
-          this.router.navigate(['']);
+        if (!this.authService.token) {
+          if (!isLoggedIn) {
+            alert("You're not logged in")
+            this.router.navigate(['/']);
+          }
         }
       })
     );

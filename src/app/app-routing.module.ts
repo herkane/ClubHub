@@ -10,17 +10,21 @@ import {RequestsComponent} from "./pages/dashboard/sections/requests/requests.co
 import {DeleteActivityComponent} from "./pages/dashboard/sections/delete-activity/delete-activity.component";
 import {PropsitionsComponent} from "./pages/dashboard/sections/propsitions/propsitions.component";
 import {MembersComponent} from "./pages/dashboard/sections/members/members.component";
-import {SignupComponent} from "./pages/signup/signup.component";
 import {SinglePostComponent} from "./components/single-post/single-post.component";
 import {RequestSentComponent} from "./pages/request-sent/request-sent.component";
 import {HasRolesGuard} from "./auth/has-roles.guard";
+import {IsAuthenticatedGuard} from "./auth/is-authenticated.guard";
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  {
+    path: '',
+    component: LandingPageComponent,
+  },
   { path: 'request-sent', component: RequestSentComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [IsAuthenticatedGuard],
     children: [
       { path: '', component: ActivitiesComponent },
       { path: 'post/:id', component: SinglePostComponent },

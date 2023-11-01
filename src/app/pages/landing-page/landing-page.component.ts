@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit{
   loginStyle: any;
   signupStyle: any;
+  isLoggedIn: any;
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginStyle = {
       'visibility': '',
     }
@@ -34,5 +37,15 @@ export class LandingPageComponent {
     this.signupStyle = {
       'display': 'none',
     };
+  }
+
+  ngOnInit(): void {
+    console.log('Landing page');
+    this.authService.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+      if (isLoggedIn) {
+        this.router.navigate(['/dashboard']);
+      }
+    })
+    console.log(this.isLoggedIn);
   }
 }

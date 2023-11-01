@@ -24,7 +24,6 @@ export class SidebarNavComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.sharedService.changeSection('')
     console.log("I am on the sidebar component destroyed")
-    this.user = null;
   }
 
   ngOnInit(): void {
