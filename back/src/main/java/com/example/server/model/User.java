@@ -12,12 +12,11 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.AUTO;
 
 @Entity(name="User")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
   @Id
-  @GeneratedValue(strategy = AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   @Column
   private String email;
@@ -30,9 +29,58 @@ public class User {
   private Roles role;
   @ManyToMany(mappedBy = "membres")
   private List<Activites> activites = new ArrayList<>();
-  @OneToOne
-  @JoinColumn(name = "candidature_id")
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
   private Candidatures candidatures;
+
+
+  public User(Long id, String email, String nom, String prenom, Roles role) {
+    this.id = id;
+    this.email = email;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.role = role;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getNom() {
+    return nom;
+  }
+
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
+
+  public String getPrenom() {
+    return prenom;
+  }
+
+  public void setPrenom(String prenom) {
+    this.prenom = prenom;
+  }
+
+  public Roles getRole() {
+    return role;
+  }
+
+  public void setRole(Roles role) {
+    this.role = role;
+  }
 
   public List<Activites> getActivites() throws Exception {
     if(this.role == Roles.VISITOR ){
@@ -47,7 +95,4 @@ public class User {
     return this.candidatures;
   }
 
-  public void viewActivity() {
-    // Implement the viewActivity method
-  }
 }

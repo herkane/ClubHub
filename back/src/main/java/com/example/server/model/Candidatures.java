@@ -9,8 +9,11 @@ import java.util.List;
 public class Candidatures {
   @Id
   private Long id;
+  @Column
   private String motivation;
-  @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private User visitor;
+  @OneToOne(mappedBy = "candidatures")
+  private User user;
+
+
 
 }
