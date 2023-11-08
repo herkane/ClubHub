@@ -1,0 +1,116 @@
+package com.example.club_hub.service.users;
+
+import com.example.club_hub.model.XUser;
+import com.example.club_hub.repository.XUserRepository;
+import com.example.club_hub.security.JwtProvider;
+import com.example.club_hub.security.MyJwtException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@Transactional
+public class UsersService implements IUsersService{
+
+    @Autowired
+    private XUserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtProvider jwtTokenProvider;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+
+    @Override
+    public XUser addUser(XUser user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public XUser updateUser(XUser user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<XUser> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public XUser getUserById(Long id) {
+        Optional<XUser> optional = userRepository.findById(id);
+        XUser user = null;
+        if(optional.isPresent()){
+            user = optional.get();
+        }else{
+            throw new RuntimeException("User not found for id :: " + id);
+        }
+        return user;
+    }
+
+    @Override
+    public XUser getUserByEmail(String email) {
+        Optional<XUser> optional = userRepository.findByEmail(email);
+        XUser user = null;
+        if(optional.isPresent()){
+            user = optional.get();
+        }else{
+            throw new RuntimeException("User not found for email :: " + email);
+        }
+        return user;
+    }
+
+    public String login(String username, String password) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            var user = userRepository.findById(search(username).getId()).get();
+            return jwtTokenProvider.createToken(user);
+        } catch (AuthenticationException e) {
+            throw new MyJwtException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
+
+    public String signup(XUser user) {
+        if (userRepository.findById(search(user.getEmail()).getId()).isPresent()) {
+            throw new MyJwtException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return jwtTokenProvider.createToken(user);
+    }
+
+    public void delete(String username) {
+        userRepository.deleteById(search(username).getId());
+    }
+
+    public XUser search(String username) {
+        return userRepository.findByEmail(username)
+                .orElseThrow(() -> new MyJwtException("The user doesn't exist", HttpStatus.NOT_FOUND));
+    }
+
+    public XUser whoami(HttpServletRequest req) {
+        return search(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(req)));
+    }
+
+    public String refresh(String username) {
+        return jwtTokenProvider.createToken(userRepository.findById(search(username).getId()).get());
+    }
+}

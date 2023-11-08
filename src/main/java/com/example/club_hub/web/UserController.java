@@ -1,6 +1,7 @@
 package com.example.club_hub.web;
 
 import com.example.club_hub.model.XUser;
+import com.example.club_hub.service.users.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.example.club_hub.service.UserService;
-
 /**
  * L'API d'authentification
  */
@@ -25,7 +23,7 @@ import com.example.club_hub.service.UserService;
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
 
 	private ModelMapper modelMapper = new ModelMapper();
 
