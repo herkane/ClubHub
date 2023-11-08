@@ -1,5 +1,6 @@
 package com.example.club_hub.controllers;
 
+import com.example.club_hub.model.Roles;
 import com.example.club_hub.model.XUser;
 import com.example.club_hub.service.users.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class XUsersController {
 
     @PutMapping("/update")
     public XUser updateUser(@RequestBody XUser user) {
+        return usersService.updateUser(user);
+    }
+
+    @PutMapping("/licenicer")
+    public XUser fireUser(@RequestBody XUser user) {
+        user.setRoles(List.of(Roles.VISITOR));
         return usersService.updateUser(user);
     }
 }
