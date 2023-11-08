@@ -38,4 +38,12 @@ public class Activity {
             inverseJoinColumns = @JoinColumn(name = "member_id")
     )
     private List<XUser> members = new ArrayList<>();
+
+    public int getParticipantsNumber() {
+        return participantsNumber;
+    }
+
+    public void setParticipantsNumber(int participantsNumber) {
+        this.participantsNumber = participantsNumber;
+    }
 }

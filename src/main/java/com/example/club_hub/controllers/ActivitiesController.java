@@ -3,6 +3,8 @@ package com.example.club_hub.controllers;
 import com.example.club_hub.model.Activity;
 import com.example.club_hub.service.activities.ActivitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,5 +40,20 @@ public class ActivitiesController {
     @PutMapping("/update/{id}")
     public Activity updateActivity(@PathVariable Long id, @RequestBody Activity activity) {
         return activitiesService.updateActivity(activity, id);
+    }
+
+    //TODO Participate : id activite , participate counter ++, save databse
+    @PutMapping("/participate/{id}")
+    public ResponseEntity<?> participateActivity(@PathVariable Long id) {
+        Activity activity = activitiesService.getActivityById(id);
+        if (activity.getParticipantsLimit() > activity.getParticipantsNumber())
+            return ResponseEntity.status(HttpStatus.OK).body(activitiesService.incrementActivity(id));
+        else return ResponseEntity.status(403).body("Participants limit reached");
+    }
+
+    //TODO Cancel Participate : id activite , participate counter --, save databse
+    @PutMapping("/cancelparticipate/{id}")
+    public Activity CancelParticipateActivity(@PathVariable Long id) {
+        return activitiesService.decrementActivity(id);
     }
 }
