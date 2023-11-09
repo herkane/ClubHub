@@ -51,4 +51,18 @@ public class ActivitiesService implements IActivitiesService{
         }
         return activity;
     }
+    @Override
+    public Activity incrementActivity(Long id){
+        Activity act = activitiesRepository.findById(id).orElseThrow(() -> new RuntimeException("Activity not found for id :: " + id));
+        act.setParticipantsNumber(act.getParticipantsNumber()+1);
+        return activitiesRepository.save(act);
+    };
+    @Override
+    public Activity decrementActivity(Long id){
+        Activity act = activitiesRepository.findById(id).orElseThrow(() -> new RuntimeException("Activity not found for id :: " + id));
+        act.setParticipantsNumber(act.getParticipantsNumber()-1);
+        return activitiesRepository.save(act);
+
+    };
+
 }

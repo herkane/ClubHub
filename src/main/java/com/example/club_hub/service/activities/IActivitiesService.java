@@ -12,5 +12,8 @@ public interface IActivitiesService {
     void deleteActivity(Long id);
     List<Activity> getAllActivities();
     Activity getActivityById(Long id);
+    Activity incrementActivity(Long id);
+    Activity decrementActivity(Long id);
+
 
 }
