@@ -25,4 +25,5 @@ export class SharedService {
   getRole() {
     return this.currentRole;
   }
+
 }

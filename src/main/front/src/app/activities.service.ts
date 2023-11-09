@@ -7,11 +7,12 @@ import {Observable} from "rxjs";
 })
 export class ActivitiesService {
   private apiUrl = 'http://localhost:8080/api';
+  private mockApi = 'http://localhost:5000';
 
   constructor(private http: HttpClient) { }
 
   loadActivities(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/activities/all`);
+    return this.http.get<any>(`${this.mockApi}/activities`);
   }
 
   loadPropositions(): Observable<any> {

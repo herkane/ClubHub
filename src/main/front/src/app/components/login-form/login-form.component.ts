@@ -21,7 +21,6 @@ export class LoginFormComponent {
   password: string | undefined;
   loading$ = new BehaviorSubject<boolean>(false);
   error$ = new BehaviorSubject<string>('');
-  user: User = {} as User;
   result : any;
   @Output() actionButtonClick =  new EventEmitter<void>;
   loginForm = new FormGroup({
@@ -43,9 +42,9 @@ export class LoginFormComponent {
       (res: any) => {
         this.router.navigate(['/dashboard']);
         this.sharedService.changeSection('Tableau de bord');
-      },
-      (error) => {
-        alert('Invalid credentials')
+      }, (err) => {
+        console.log("User not logged in")
+        console.log(err)
       }
     )
   }

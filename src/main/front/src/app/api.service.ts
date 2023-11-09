@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -7,12 +7,15 @@ import {Observable} from "rxjs";
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) { }
 
   login(credentials: any): Observable<any> {
-    return this.http.get(`${this.apiUrl}/login`, credentials)
+    const params = new HttpParams()
+      .set('email', credentials.email)
+      .set('password', credentials.password);
+    return this.http.post(`${this.apiUrl}/auth/login`, null, {params})
   }
 
   getActivities(): Observable<any> {
@@ -28,6 +31,6 @@ export class ApiService {
   }
 
   register(userObject: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userObject)
+    return this.http.post(`${this.apiUrl}/auth/signup`, userObject)
   }
 }

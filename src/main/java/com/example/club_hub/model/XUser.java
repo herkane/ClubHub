@@ -19,9 +19,9 @@ public class XUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String email;
-    private String nom;
-    private String prenom;
+    private String fullName;
     private String password;
+    private String phoneNumber;
     @Lob
     private String image;
     @ElementCollection(fetch = FetchType.EAGER)
@@ -29,10 +29,9 @@ public class XUser {
     @ManyToMany(mappedBy = "members")
     private List<Activity> activities = new ArrayList<>();
 
-    public XUser(String email, String nom, String prenom, List<Roles> role) {
+    public XUser(String email, String nom, List<Roles> role) {
         this.email = email;
-        this.nom = nom;
-        this.prenom = prenom;
+        this.fullName = nom;
         this.roles = role;
     }
 }

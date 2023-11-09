@@ -1,6 +1,8 @@
 package com.example.club_hub.service.users;
 
+import com.example.club_hub.model.Roles;
 import com.example.club_hub.model.XUser;
+import com.example.club_hub.model.dto.UserSignUp;
 import com.example.club_hub.repository.XUserRepository;
 import com.example.club_hub.security.JwtProvider;
 import com.example.club_hub.security.MyJwtException;
@@ -81,20 +83,21 @@ public class UsersService implements IUsersService{
     public String login(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-            var user = userRepository.findById(search(username).getId()).get();
+            var user = userRepository.findByEmail(username).get();
+            System.out.println(user);
             return jwtTokenProvider.createToken(user);
         } catch (AuthenticationException e) {
             throw new MyJwtException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
-    public String signup(XUser user) {
-        if (userRepository.findById(search(user.getEmail()).getId()).isPresent()) {
-            throw new MyJwtException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+    public XUser signup(XUser user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new MyJwtException("Email is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
+        user.setRoles(List.of(Roles.CANDIDATE));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return jwtTokenProvider.createToken(user);
+        return userRepository.save(user);
     }
 
     public void delete(String username) {

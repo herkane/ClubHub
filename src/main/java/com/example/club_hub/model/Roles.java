@@ -4,5 +4,6 @@ public enum Roles {
     ADMIN,
     VIP,
     MEMBER,
-    VISITOR
+    VISITOR,
+    CANDIDATE
 }

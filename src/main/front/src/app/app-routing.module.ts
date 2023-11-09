@@ -21,6 +21,7 @@ const routes: Routes = [
     component: LandingPageComponent,
   },
   { path: 'request-sent', component: RequestSentComponent },
+  { path: 'activities', component: ActivitiesComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -33,7 +34,7 @@ const routes: Routes = [
         component: NewActivityComponent,
         canActivate: [HasRolesGuard],
         data: {
-          role: 'vip',
+          role: 'VIP',
         }
       },
       {
@@ -41,7 +42,7 @@ const routes: Routes = [
         component: SinglePostComponent,
         canActivate: [HasRolesGuard],
         data: {
-          role: 'admin',
+          role: 'ADMIN',
         }
       },
       {
@@ -49,7 +50,7 @@ const routes: Routes = [
         component: SinglePostComponent,
         canActivate: [HasRolesGuard],
         data: {
-          role: 'admin',
+          role: 'ADMIN',
         }
       },
       {
@@ -57,7 +58,7 @@ const routes: Routes = [
         component: DeleteActivityComponent,
         canActivate: [HasRolesGuard],
         data: {
-          role: 'admin',
+          role: 'ADMIN',
         }
       },
       {
@@ -65,7 +66,7 @@ const routes: Routes = [
         component: RequestsComponent,
         canActivate: [HasRolesGuard],
         data: {
-          role: 'admin',
+          role: 'ADMIN',
         }
       },
       {
@@ -73,7 +74,7 @@ const routes: Routes = [
         component: PropsitionsComponent,
         canActivate: [HasRolesGuard],
         data: {
-          role: 'admin',
+          role: 'ADMIN',
         }
       },
       {
@@ -81,7 +82,7 @@ const routes: Routes = [
         component: MembersComponent,
         canActivate: [HasRolesGuard],
         data: {
-          role: 'member',
+          role: 'MEMBER',
         }
       }
     ]

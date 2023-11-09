@@ -8,7 +8,6 @@ import {ApiService} from "../api.service";
   providedIn: 'root'
 })
 export class AuthService{
-  private apiUrl = 'http://localhost:5000';
   private readonly _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private readonly TOKEN_NAME = 'auth';
   isLoggedIn$ = this._isLoggedIn$.asObservable();
@@ -32,30 +31,39 @@ export class AuthService{
     })
   }
 
-
   login(credentials: any) {
     this.customToken = this.customTokenAdmin;
     return this.apiService.login(credentials).pipe(
       tap((res: any) => {
+        console.log("Auth service");
+        console.log(res);
         this._isLoggedIn$.next(true);
-        //To change after with res.token
-        if (typeof this.customToken === "string") {
-          localStorage.setItem(this.TOKEN_NAME, this.customToken)
+        if (typeof res.token === "string") {
+          localStorage.setItem(this.TOKEN_NAME, res.token); // Use the token from the API response
+          this.user = this.getUser(res.token); // Decode and set the user data
+          console.log(this.user);
         }
-        this.user = this.getUser(this.customToken);
+      }, (err) => {
+        console.log("Error");
+        console.log(err);
       })
-    )
+    );
   }
+
   private getUser(token: undefined | string): User | null {
     if (!token) {
       return null
     }
-    return JSON.parse(atob(token.split('.')[1])) as User;
+    return JSON.parse(atob(token.split('.')[1])).user as User;
   }
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_NAME);
     this._isLoggedIn$.next(false);
     this.user = null;
+  }
+
+  register(userObject: any): Observable<any> {
+    return this.apiService.register(userObject)
   }
 }

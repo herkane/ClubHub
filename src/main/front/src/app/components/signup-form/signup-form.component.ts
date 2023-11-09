@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../../models/user.interface";
 import {Router} from "@angular/router";
+import {AuthService} from "../../auth/auth.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-signup-form',
@@ -17,8 +19,14 @@ export class SignupFormComponent {
   newUser: User = {} as User
 
   @Output() actionButton = new EventEmitter<void>()
+  signupForm = new FormGroup({
+    email: new FormControl(null, Validators.required),
+    password: new FormControl(null, Validators.required),
+    fullName: new FormControl(null, Validators.required),
+    phoneNumber: new FormControl(null, Validators.required)
+  });
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private authService : AuthService) {
   }
 
   onFileSelected(event: any) {
@@ -34,27 +42,22 @@ export class SignupFormComponent {
   }
 
   onSubmit() {
-    if (this.base64image) {
-      //this.newUser.image = this.base64image
-      this.newUser.image = "The image works i just needed to comment it for long lines reasons"
-      this.uploadFile(this.newUser).subscribe(
-        (res) => {
-          console.log("User created")
-          console.log(res)
-          this.router.navigate(['/request-sent'])
-        },
-        (err) => {
-          console.log("User not created")
-          console.log(err)
-        }
-      )
+    console.log(this.signupForm.controls)
+    if (this.signupForm.invalid) {
+      alert('invalid form')
+      return
     }
-  }
-
-  uploadFile(user: any): Observable<any> {
-    if (user) {
-      return this.http.post<any>(`http://localhost:5000/register`, user)
-    } else
-    return new Observable()
+    this.authService.register(this.signupForm.value).subscribe(
+      (res: any) => {
+        if (this.base64image) {
+          //this.newUser.image = this.base64image
+          this.newUser.image = "The image works i just needed to comment it for long lines reasons"
+        }
+        this.router.navigate(['/request-sent'])
+      }, (err) => {
+        console.log("User not created")
+        console.log(err)
+      }
+    )
   }
 }

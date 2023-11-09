@@ -44,7 +44,7 @@
       "name": "Admin Admin",
       "email": "admin@admin.com",
       "password": "admin",
-      "roles": ["admin", "member", "vip"]
+      "roles": ["ADMIN", "member", "vip"]
     },
     {
       "id": 2,

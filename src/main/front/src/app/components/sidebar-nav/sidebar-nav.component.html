@@ -29,8 +29,8 @@
           </button>
           <ul id="dropdown-example" class="hidden py-2 space-y-2">
             <li>
-              <a *ngIf="whatIsUser === 'admin'" (click)="navigateTo('dashboard/new-activity')" class="cursor-pointer flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group-hover:text-black">Ajouter</a>
-              <a *ngIf="whatIsUser === 'vip'" (click)="navigateTo('dashboard/new-activity')" class="cursor-pointer flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group-hover:text-black">Proposer</a>
+              <a *ngIf="whatIsUser === 'ADMIN'" (click)="navigateTo('dashboard/new-activity')" class="cursor-pointer flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group-hover:text-black">Ajouter</a>
+              <a *ngIf="whatIsUser === 'VIP'" (click)="navigateTo('dashboard/new-activity')" class="cursor-pointer flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group-hover:text-black">Proposer</a>
             </li>
             <li [style]="adminStyle">
               <a (click)="navigateTo('dashboard/delete-activity')" class="cursor-pointer flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group-hover:text-black">Supprimer</a>
@@ -60,7 +60,7 @@
 
       <!-- Se deconneceter -->
 
-      <div [style]="memberStyle">
+      <div [style]="">
         <li>
           <a (click)="logout()" class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-gray-700 group">
             <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">

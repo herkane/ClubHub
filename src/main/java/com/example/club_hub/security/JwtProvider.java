@@ -32,7 +32,7 @@ public class JwtProvider {
 	 * préférable d'avoir un autre API (sur un serveur de configuration) qui nous
 	 * fournisse la clé.
 	 */
-	@Value("${security.jwt.token.secret-key:secret-key}")
+	//@Value("${security.jwt.token.secret-key:secret-key}")
 	private String secretKey = "secret";
 
 	@Value("${security.jwt.token.expire-length:3600000}")
@@ -48,9 +48,8 @@ public class JwtProvider {
 
 	public String createToken(XUser user) {
 
-		Claims claims = Jwts.claims().setSubject(user.getEmail());
-		claims.put("auth", user.getRoles().stream().filter(Objects::nonNull).collect(Collectors.toList()));
-
+		Claims claims = Jwts.claims();
+		claims.put("user", user);
 		Date now = new Date();
 		Date validity = new Date(now.getTime() + validityInMilliseconds);
 

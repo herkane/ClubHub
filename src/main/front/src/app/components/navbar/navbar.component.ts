@@ -19,14 +19,22 @@ import {SharedService} from "../../SharedService";
 export class NavbarComponent implements OnInit{
   @Input() title : any
   currentSection: string | undefined
+  isLoggedIn: any;
 
-  constructor(private sharedService: SharedService) {
+  constructor(private sharedService: SharedService, private router: Router, private authService: AuthService) {
     this.sharedService.currentSection.subscribe(section => this.currentSection = section)
   }
-
-  protected readonly select = select;
 
   ngOnInit(): void {
-    this.sharedService.currentSection.subscribe(section => this.currentSection = section)
+    this.authService.isLoggedIn$.subscribe((data) => {
+      this.isLoggedIn = data
+      console.log(this.isLoggedIn)
+    })
   }
+
+  goToActivities() {
+    this.sharedService.changeSection('')
+    this.router.navigate(['/activities'])
+  }
+
 }

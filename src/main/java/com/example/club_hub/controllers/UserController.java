@@ -1,25 +1,24 @@
-package com.example.club_hub.web;
+package com.example.club_hub.controllers;
 
 import com.example.club_hub.model.XUser;
+import com.example.club_hub.model.dto.UserSignUp;
 import com.example.club_hub.service.users.UsersService;
+import com.example.club_hub.web.XUserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 /**
  * L'API d'authentification
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -31,17 +30,20 @@ public class UserController {
 	 * Authentification et récupération d'un JWT
 	 */
 	@PostMapping("/login")
-	public String login(//
-			@RequestParam String username, //
-			@RequestParam String password) {
-		return userService.login(username, password);
+	public ResponseEntity<?> login(//
+								@RequestParam String email, //
+								@RequestParam String password) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("token",userService.login(email, password));
+		return ResponseEntity.ok(map);
 	}
 
 	/**
 	 * Ajouter un utilisateur
 	 */
 	@PostMapping("/signup")
-	public String signup(@RequestBody XUserSingUpDto user) {
+	public XUser signup(@RequestBody UserSignUp user) {
+		System.out.println("signup " + user.getEmail());
 		return userService.signup(modelMapper.map(user, XUser.class));
 	}
 
