@@ -3,6 +3,7 @@ import {ActivityCardComponent} from "../../../../components/activity-card/activi
 import {ActivitiesService} from "../../../../activities.service";
 import {ActivitiesComponent} from "../activities/activities.component";
 import {Router} from "@angular/router";
+import {ActivityInterface} from "../../../../../models/activity.interface";
 
 @Component({
   selector: 'app-delete-activity',
@@ -13,14 +14,14 @@ export class DeleteActivityComponent implements OnInit{
 
   constructor(private activitiesService : ActivitiesService, private router: Router) {}
 
-  activities : any
+  activities : any[] = []
   user: any
 
   onDeleteClick(childElement: ActivityCardComponent) {
     this.activitiesService.deleteActivity(childElement.activity.id).subscribe(
       (res: any) => {
         console.log(res)
-        this.activities = this.activitiesService.loadActivities().subscribe((data) => {
+        this.activitiesService.loadActivities('ok').subscribe((data) => {
           this.activities = data
           }
         )
@@ -32,7 +33,7 @@ export class DeleteActivityComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.activitiesService.loadActivities().subscribe((data) => {
+    this.activitiesService.loadActivities('ok').subscribe((data) => {
       this.activities = data
     })
   }

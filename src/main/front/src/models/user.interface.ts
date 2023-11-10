@@ -1,7 +1,7 @@
 // user.interface.ts
 export interface User {
   id: number | null;
-  name: string | null;
+  fullName: string | null;
   email: string | null;
   password: string | null;
   token: string | null;

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ClubHubApplication {
@@ -25,19 +26,25 @@ public class ClubHubApplication {
 
             // creating the SuperAdmin Organizer
             // this admin should have all the roles
-            ArrayList<Roles> AdminRoles = new ArrayList<>();
-            AdminRoles.add(Roles.ADMIN);
-            AdminRoles.add(Roles.VIP);
-            AdminRoles.add(Roles.MEMBER);
             XUser admin = XUser
                     .builder()
                     .fullName("Admin Admin")
                     .email("admin@admin.com")
-                    .roles(AdminRoles)
+                    .roles(List.of(Roles.ADMIN, Roles.VIP, Roles.MEMBER))
                     .phoneNumber("01234567890")
                     .password(passwordEncoder.encode("admin"))
                     .build();
             userService.addUser(admin);
+            XUser vip = XUser
+                    .builder()
+                    .fullName("Vip Vip")
+                    .email("vip@vip.com")
+                    .roles(List.of(Roles.VIP, Roles.MEMBER))
+                    .phoneNumber("01234567890")
+                    .password(passwordEncoder.encode("vip"))
+                    .build();
+            userService.addUser(admin);
+            userService.addUser(vip);
             System.out.println("admin seeded, email: " + admin.getEmail() + " password: " + admin.getPassword());
         };
     }

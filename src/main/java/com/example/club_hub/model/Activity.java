@@ -1,5 +1,6 @@
 package com.example.club_hub.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,8 @@ public class Activity {
     private Long id;
     private String title;
     private String content;
+    private String status;
+    private String author;
     private int participantsLimit;
     @Value("0")
     private int participantsNumber;
@@ -34,18 +37,5 @@ public class Activity {
     private Date arrival_date;
     @Nullable
     @ManyToMany
-    @JoinTable(
-            name = "members_activites",
-            joinColumns = @JoinColumn(name = "activity_id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id")
-    )
     private List<XUser> members = new ArrayList<>();
-
-    public int getParticipantsNumber() {
-        return participantsNumber;
-    }
-
-    public void setParticipantsNumber(int participantsNumber) {
-        this.participantsNumber = participantsNumber;
-    }
 }

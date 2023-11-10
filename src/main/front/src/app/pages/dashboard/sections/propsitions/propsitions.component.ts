@@ -22,7 +22,7 @@ export class PropsitionsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.activitiesService.loadPropositions().subscribe((data) => {
+    this.activitiesService.loadActivities('pending').subscribe((data) => {
       this.propositions = data
     },
       (error) => {

@@ -1,6 +1,7 @@
 package com.example.club_hub.controllers;
 
 import com.example.club_hub.model.Activity;
+import com.example.club_hub.model.Roles;
 import com.example.club_hub.model.XUser;
 import com.example.club_hub.service.activities.ActivitiesService;
 import com.example.club_hub.service.users.UsersService;
@@ -25,8 +26,8 @@ public class ActivitiesController {
     private UsersService usersService;
 
     @GetMapping("")
-    public List<Activity> getActivities() {
-        return activitiesService.getAllActivities();
+    public List<Activity> getActivities(@RequestParam String status) {
+        return activitiesService.getAllActivities(status);
     }
 
     @GetMapping("/get/{id}")
@@ -35,7 +36,13 @@ public class ActivitiesController {
     }
 
     @PostMapping("/add")
-    public Activity addActivity(@RequestBody Activity activity) {
+    public Activity addActivity(@RequestBody Activity activity, @RequestParam Long userId) {
+        List<Roles> role = usersService.getUserById(userId).getRoles();
+        if (role.contains(Roles.ADMIN)) {
+            activity.setStatus("ok");
+        } else {
+            activity.setStatus("pending");
+        }
         return activitiesService.addActivity(activity);
     }
 
@@ -49,20 +56,34 @@ public class ActivitiesController {
         return activitiesService.updateActivity(activity, id);
     }
 
+    @GetMapping("/isParticipating")
+    public boolean isParticipating(@RequestParam Long id, @RequestParam Long userId) {
+        Activity activity = activitiesService.getActivityById(id);
+        XUser user = usersService.getUserById(userId);
+        return activity.getMembers().contains(user);
+    }
+
     //TODO Participate : id activite , participate counter ++, save databse
     @PutMapping("/participate")
     public ResponseEntity<?> participateActivity(@RequestParam Long id, @RequestParam Long userId) {
         Activity activity = activitiesService.getActivityById(id);
+        XUser user = usersService.getUserById(userId);
         if (activity.getParticipantsLimit() > activity.getParticipantsNumber()) {
-            activity.getMembers().add(usersService.getUserById(userId));
-            activity.setMembers(activity.getMembers());
-            return ResponseEntity.status(HttpStatus.OK).body(activitiesService.incrementActivity(id));
+            List<XUser> members = activity.getMembers();
+            members.add(user);
+            activity.setMembers(members);
+            return ResponseEntity.status(HttpStatus.OK).body(activitiesService.incrementActivity(activity));
         } else return ResponseEntity.status(403).body("Participants limit reached");
     }
 
     //TODO Cancel Participate : id activite , participate counter --, save databse
-    @PutMapping("/cancelparticipate/{id}")
-    public Activity CancelParticipateActivity(@PathVariable Long id) {
-        return activitiesService.decrementActivity(id);
+    @PutMapping("/cancel-participation")
+    public ResponseEntity<?> CancelParticipateActivity(@RequestParam Long id, @RequestParam Long userId) {
+        Activity activity = activitiesService.getActivityById(id);
+        XUser user = usersService.getUserById(userId);
+        List<XUser> members = activity.getMembers();
+        members.remove(user);
+        activity.setMembers(members);
+        return ResponseEntity.status(HttpStatus.OK).body(activitiesService.decrementActivity(activity));
     }
 }

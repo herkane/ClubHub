@@ -30,14 +30,18 @@ public class ActivitiesService implements IActivitiesService{
         return activitiesRepository.save(act);
     }
 
+    public List<Activity> getAllProposals() {
+        return activitiesRepository.findAll();
+    }
+
     @Override
     public void deleteActivity(Long id) {
         activitiesRepository.deleteById(id);
     }
 
     @Override
-    public List<Activity> getAllActivities() {
-        return activitiesRepository.findAll();
+    public List<Activity> getAllActivities(String status) {
+        return activitiesRepository.findAllByStatus(status);
     }
 
     @Override
@@ -52,17 +56,16 @@ public class ActivitiesService implements IActivitiesService{
         return activity;
     }
     @Override
-    public Activity incrementActivity(Long id){
-        Activity act = activitiesRepository.findById(id).orElseThrow(() -> new RuntimeException("Activity not found for id :: " + id));
+    public Activity incrementActivity(Activity activity){
+        Activity act = activitiesRepository.findById(activity.getId()).orElseThrow(() -> new RuntimeException("Activity not found for id :: " + activity.getId()));
         act.setParticipantsNumber(act.getParticipantsNumber()+1);
         return activitiesRepository.save(act);
-    };
+    }
     @Override
-    public Activity decrementActivity(Long id){
-        Activity act = activitiesRepository.findById(id).orElseThrow(() -> new RuntimeException("Activity not found for id :: " + id));
+    public Activity decrementActivity(Activity activity){
+        Activity act = activitiesRepository.findById(activity.getId()).orElseThrow(() -> new RuntimeException("Activity not found for id :: " + activity.getId()));
         act.setParticipantsNumber(act.getParticipantsNumber()-1);
         return activitiesRepository.save(act);
-
-    };
+    }
 
 }

@@ -1,14 +1,17 @@
 // user.interface.ts
+import {User} from "./user.interface";
+
 export interface ActivityInterface {
   id: number;
   title: string;
   content: string;
-  participants: string;
+  members: User[];
   image: string;
-  eventDate: string;
+  departure_date: string;
+  arrival_date: string;
   participantsNumber: number;
   participantsLimit: number;
-  proposedBy: string;
+  author: string;
   status: string;
   proposalDate: string;
 }

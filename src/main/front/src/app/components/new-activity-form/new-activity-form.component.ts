@@ -20,9 +20,10 @@ export class NewActivityFormComponent implements OnInit{
     departure_date: new FormControl(null, Validators.required),
     arrival_date: new FormControl(null, Validators.required),
     image: new FormControl(null),
+    author: new FormControl(this.authService.user.fullName),
   });
 
-  constructor(private activitiesService: ActivitiesService, private router: Router, private sharedService: SharedService) {
+  constructor(private activitiesService: ActivitiesService, private router: Router, private sharedService: SharedService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class NewActivityFormComponent implements OnInit{
       alert('invalid form')
       return
     }
-    this.activitiesService.addActivity(this.addActivityGroup.value).subscribe(
+    this.activitiesService.addActivity(this.addActivityGroup.value, this.authService.user.id).subscribe(
       (res: any) => {
         this.router.navigate(['/dashboard']);
         this.sharedService.changeSection('Tableau de bord');

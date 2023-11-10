@@ -17,6 +17,7 @@ export class ActivityCardComponent implements OnInit {
   participateStyle: any
   cancelStyle: any
   deleteStyle: any;
+  propositionStyle: any;
   participating = false
   counterStyle: any
   proposed_by: any
@@ -24,6 +25,7 @@ export class ActivityCardComponent implements OnInit {
   memberStyle: any
   user: any
   currentRole: any
+  isParticipating: boolean = false;
   @Input() activity : ActivityInterface = {} as ActivityInterface;
 
 
@@ -33,8 +35,10 @@ export class ActivityCardComponent implements OnInit {
   @Output() onActionButtonClick = new EventEmitter<void>();
   @Input() actionButtonLabel2: string = '';
   @Input() actionButtonLabel3: string = '';
+  @Input() actionButtonLabel4: string = '';
   @Output() onActionButtonClick2 = new EventEmitter<void>();
   @Output() onActionButtonClick3 = new EventEmitter<void>();
+  @Output() onActionButtonClick4 = new EventEmitter<void>();
 
 
   constructor(private router : Router, private authService: AuthService, private sharedService : SharedService, private activityService : ActivitiesService) {
@@ -49,30 +53,23 @@ export class ActivityCardComponent implements OnInit {
     this.deleteStyle = {
       'display' : 'none'
     }
-    this.activity.participantsNumber++
-    this.activityService.participate(this.activity.id).subscribe(
-      (res: any) => {
-        console.log(res)
+  }
 
+  isParticipatingInActivity(): boolean {
+    this.activityService.isParticipating(this.activity.id, this.authService.user.id).subscribe(
+      (res: boolean) => {
+        console.log(res)
+        this.isParticipating = res
       }, (err) => {
         console.log("Activity not added")
         console.log(err)
       }
     )
-    console.log(this.activity.id)
+    return this.isParticipating
   }
 
   cancel() {
-    this.participateStyle = {
-      'visibility' : ''
-    }
-    this.cancelStyle = {
-      'display' : 'none'
-    }
-    this.deleteStyle = {
-      'display' : 'none'
-    }
-    this.activity.participantsNumber--
+    this.isParticipating = false
   }
 
   delete() {
@@ -85,19 +82,11 @@ export class ActivityCardComponent implements OnInit {
     this.deleteStyle = {
       'visibility' : ''
     }
-    this.activityService.deleteActivity(this.activity.id).subscribe(
-      (res: any) => {
-        console.log(res)
-        this.router.navigate(['/dashboard']);
-      }, (err) => {
-        console.log("Activity not deleted")
-        console.log(err)
-      }
-    )
   }
 
   ngOnInit(): void {
-    console.log(this.activity.participants)
+    this.isParticipatingInActivity()
+    console.log(this.activity.members)
     this.user = this.authService.user;
     this.sharedService.currentRole.subscribe(
       role => this.currentRole = role
@@ -107,7 +96,6 @@ export class ActivityCardComponent implements OnInit {
         'display': 'none'
       };
     }
-
     this.currentPath = this.router.url
     this.proposed_by = {
       'display': 'none'
@@ -121,27 +109,52 @@ export class ActivityCardComponent implements OnInit {
     this.deleteStyle = {
       'display': 'none'
     }
+    this.propositionStyle = {
+      'display': 'none'
+    }
     if (this.purpose === 'Delete') {
       this.participateStyle = {
         'display': 'none',
       }
-      this.cancelStyle = {
+      this.propositionStyle = {
         'display': 'none'
       }
       this.deleteStyle = {
         'visibility': ''
+      }
+      this.cancelStyle = {
+        'display': 'none'
       }
     } else if (this.purpose === 'Proposition') {
       this.counterStyle = {
         'display': 'none'
       }
       this.cancelStyle = {
-        'visibility': ''
+        'display': 'none'
       }
       this.proposed_by = {
         'visibility': ''
       }
       this.participateStyle = {
+        'display': 'none'
+      }
+      this.deleteStyle = {
+        'display': 'none'
+      }
+      this.propositionStyle = {
+        'display': ''
+      }
+    } else if (this.purpose === 'Participate') {
+      this.participateStyle = {
+        'display': ''
+      }
+      this.cancelStyle = {
+        'display': ''
+      }
+      this.proposed_by = {
+        'display': 'none'
+      }
+      this.deleteStyle = {
         'display': 'none'
       }
     }

@@ -28,8 +28,7 @@ public class XUser {
     private String image;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Roles> roles;
-    @ManyToMany(mappedBy = "members")
-    private List<Activity> activities = new ArrayList<>();
+
 
     public XUser(String email, String nom, List<Roles> role) {
         this.email = email;

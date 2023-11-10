@@ -6,9 +6,9 @@
     <img class="mx-32 h-auto max-w-xl rounded-lg shadow-xl dark:shadow-gray-800" src="./assets/profile.jpg" alt="image description">
     <div class="mx-48">
       <h1 class="text-3xl font-bold">By who ?</h1>
-      <p class="mb-8 mt-2 text-black text-xl">{{post.proposedBy || 'ADMIN'}}</p>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.author || 'ADMIN'}}</p>
       <h1 class="text-3xl font-bold">When ?</h1>
-      <p class="mb-8 mt-2 text-black text-xl">{{post.eventDate || "I don't know"}}</p>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.departure_date || "I don't know"}}</p>
       <h1 class="text-3xl font-bold">How many are allowed ?</h1>
       <p class="mb-8 mt-2 text-black text-xl">{{post.participantsLimit || "I don't know"}}</p>
       <h1 class="text-3xl font-bold">What is this about ?</h1>

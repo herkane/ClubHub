@@ -11,7 +11,7 @@ export class AuthService{
   private readonly _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private readonly TOKEN_NAME = 'auth';
   isLoggedIn$ = this._isLoggedIn$.asObservable();
-  user: User | null = {} as User
+  user: any
   customTokenAdmin = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInZpcCIsIm1lbWJlciJdfQ.7_7BqdVBEa2EOuL0QBpcBMccji-MPK3M2nHwy_qHQ_Q';
   customTokenVip = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJ2aXAiLCJtZW1iZXIiXX0.R42lm4ipcblk_tq1wCxHa7xLwfaartNdVieEg-BAnIY';
   customTokenMember = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJtZW1iZXIiXX0.lPXLVPvNFhutoZFFjss92f8jtANn2VgpysUVptcQlRU';

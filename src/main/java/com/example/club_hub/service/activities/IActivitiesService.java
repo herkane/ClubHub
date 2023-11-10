@@ -10,10 +10,10 @@ public interface IActivitiesService {
     Activity addActivity(Activity activity);
     Activity updateActivity(Activity activity, Long id);
     void deleteActivity(Long id);
-    List<Activity> getAllActivities();
+    List<Activity> getAllActivities(String status);
     Activity getActivityById(Long id);
-    Activity incrementActivity(Long id);
-    Activity decrementActivity(Long id);
+    Activity incrementActivity(Activity activity);
+    Activity decrementActivity(Activity activity);
 
 
 }
