@@ -29,7 +29,7 @@ export class SidebarNavComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     if (this.user?.roles?.includes('ADMIN')) {
       console.log("This user has an Admin role")
-      this.whatIsUser = 'admin'
+      this.whatIsUser = 'ADMIN'
       this.sharedService.changeUserRole('ADMIN')
     } else if (this.user?.roles?.some((role: string) => role === 'VIP')) {
       console.log("This user has a VIP role")

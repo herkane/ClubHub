@@ -20,11 +20,17 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
         </svg>
       </a>
+      <a [style]="deleteStyle" [ngStyle]="memberStyle" (click)="onActionButtonClick3.emit()" class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        {{ actionButtonLabel3 }}
+        <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
       <span [style]="counterStyle" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300">
       Participants : {{activity.participantsNumber}}/{{activity.participantsLimit}}
       </span>
     </div>
-    <span [style]="proposed_by" class=" text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300">
+    <span [style]="proposed_by" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300">
       <b>Proposed by :</b>&nbsp;{{activity.proposedBy || "ADMIN"}}&nbsp; <b> at </b>&nbsp; {{activity.proposalDate || "2021-01-01"}}
       </span>
   </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -12,7 +12,23 @@ export class ActivitiesService {
   constructor(private http: HttpClient) { }
 
   loadActivities(): Observable<any> {
-    return this.http.get<any>(`${this.mockApi}/activities`);
+    return this.http.get<any>(`${this.apiUrl}/activities`);
+  }
+
+  addActivity(activityObject: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/activities/add`, activityObject)
+  }
+
+  deleteActivity(id: number): Observable<any> {
+    const params = new HttpParams()
+      .set('id', id)
+    return this.http.delete(`${this.apiUrl}/activities/delete`, {params})
+  }
+
+  participate(id: number): Observable<any> {
+    const params = new HttpParams()
+      .set('id', id)
+    return this.http.put(`${this.apiUrl}/activities/participate`, null, {params})
   }
 
   loadPropositions(): Observable<any> {

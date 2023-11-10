@@ -29,7 +29,9 @@ public class Activity {
     @Nullable
     private String image;
     @Nullable
-    private Date eventDate;
+    private Date departure_date;
+    @Nullable
+    private Date arrival_date;
     @Nullable
     @ManyToMany
     @JoinTable(

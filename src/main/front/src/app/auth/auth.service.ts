@@ -22,7 +22,7 @@ export class AuthService{
     return localStorage.getItem(this.TOKEN_NAME)
   }
 
-  constructor(private http: HttpClient, private apiService : ApiService) {
+  constructor(private apiService : ApiService) {
     this._isLoggedIn$.next(!!localStorage.getItem(this.TOKEN_NAME))
     this.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
       if (isLoggedIn) {

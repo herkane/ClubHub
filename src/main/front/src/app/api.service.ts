@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 export class ApiService {
 
   private apiUrl = 'http://localhost:8080/api';
+  private mockApi = 'http://localhost:5000';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,10 @@ export class ApiService {
       .set('email', credentials.email)
       .set('password', credentials.password);
     return this.http.post(`${this.apiUrl}/auth/login`, null, {params})
+  }
+
+  addActivity(activityObject: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/activities/add`, activityObject)
   }
 
   getActivities(): Observable<any> {
