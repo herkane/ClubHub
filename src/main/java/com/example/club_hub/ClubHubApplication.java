@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class ClubHubApplication {
@@ -30,7 +31,7 @@ public class ClubHubApplication {
                     .builder()
                     .fullName("Admin Admin")
                     .email("admin@admin.com")
-                    .roles(List.of(Roles.ADMIN, Roles.VIP, Roles.MEMBER))
+                    .roles(Set.of(Roles.ADMIN, Roles.VIP, Roles.MEMBER))
                     .phoneNumber("01234567890")
                     .password(passwordEncoder.encode("admin"))
                     .build();
@@ -39,7 +40,7 @@ public class ClubHubApplication {
                     .builder()
                     .fullName("Vip Vip")
                     .email("vip@vip.com")
-                    .roles(List.of(Roles.VIP, Roles.MEMBER))
+                    .roles(Set.of(Roles.VIP, Roles.MEMBER))
                     .phoneNumber("01234567890")
                     .password(passwordEncoder.encode("vip"))
                     .build();
@@ -47,7 +48,7 @@ public class ClubHubApplication {
                     .builder()
                     .fullName("Candidate Candidate")
                     .email("candidate@candidate.com")
-                    .roles(List.of(Roles.CANDIDATE))
+                    .roles(Set.of(Roles.CANDIDATE))
                     .phoneNumber("01234567890")
                     .password(passwordEncoder.encode("candidate"))
                     .build();

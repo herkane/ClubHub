@@ -19,23 +19,20 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/auth/login`, null, {params})
   }
 
-  addActivity(activityObject: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/activities/add`, activityObject)
-  }
-
-  getActivities(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/activities`)
-  }
-
-  getMembers(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/members`)
-  }
-
-  getPropositions(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/propositions`)
-  }
-
   register(userObject: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/signup`, userObject)
+  }
+
+  approveOrRefuseCandidate(id: number, action: string): Observable<any> {
+    const params = new HttpParams()
+      .set('userId', id)
+      .set('action', action)
+    return this.http.put(`${this.apiUrl}/users/approve-or-refuse-member`, null, {params})
+  }
+
+  getUsersByRole(role: string): Observable<any> {
+    const params = new HttpParams()
+      .set('role', role)
+    return this.http.get(`${this.apiUrl}/users/findUsersByRole`, {params})
   }
 }

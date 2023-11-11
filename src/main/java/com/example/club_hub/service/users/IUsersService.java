@@ -2,6 +2,7 @@ package com.example.club_hub.service.users;
 
 
 
+import com.example.club_hub.model.Roles;
 import com.example.club_hub.model.XUser;
 
 import java.util.List;
@@ -18,5 +19,7 @@ public interface IUsersService {
     XUser getUserById(Long id);
 
     XUser getUserByEmail(String email);
+
+    List<XUser> getUsersByRole(Roles role);
 
 }

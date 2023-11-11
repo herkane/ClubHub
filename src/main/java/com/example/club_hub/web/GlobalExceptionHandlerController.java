@@ -40,9 +40,4 @@ public class GlobalExceptionHandlerController {
     res.sendError(HttpStatus.FORBIDDEN.value(), "Access denied");
   }
 
-  @ExceptionHandler(Exception.class)
-  public void handleException(HttpServletResponse res) throws IOException {
-    res.sendError(HttpStatus.BAD_REQUEST.value(), "Something went wrong");
-  }
-
 }

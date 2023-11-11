@@ -1,18 +1,35 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from "../../../../api.service";
+import {SharedService} from "../../../../SharedService";
+import {AuthService} from "../../../../auth/auth.service";
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.css']
 })
-export class MembersComponent {
+export class MembersComponent implements OnInit{
 
-  counter(n: number): number[] {
-    return Array.from({ length: n }, (_, index) => index);
+  members: any
+
+  onFireMember(childElement: any) {
+    if (childElement.user.id === this.authService.user.id) {
+      return
+    }
+    this.apiService.approveOrRefuseCandidate(childElement.user.id, "fire").subscribe((response: any) => {
+      this.apiService.getUsersByRole("MEMBER").subscribe((response: any) => {
+        this.members = response;
+      } )
+    })
   }
 
-  onFireMember() {
-    alert("Member fired")
+  constructor(private apiService : ApiService, private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.apiService.getUsersByRole("MEMBER").subscribe((response: any) => {
+      this.members = response;
+    })
   }
 
 }

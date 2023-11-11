@@ -1,20 +1,38 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from "../../../../api.service";
 
 @Component({
   selector: 'app-requests',
   templateUrl: './requests.component.html',
   styleUrls: ['./requests.component.css']
 })
-export class RequestsComponent {
-  counter(n: number): number[] {
-    return Array.from({ length: n }, (_, index) => index);
+export class RequestsComponent implements OnInit{
+  requests: any
+  childElement: any
+
+  constructor(private apiService : ApiService) {
   }
 
-  onAcceptMember() {
-    alert("Member Accepted")
+  onAcceptMemberClick(childElement: any) {
+    this.apiService.approveOrRefuseCandidate(childElement.user.id, "accept").subscribe((response: any) => {
+      this.apiService.getUsersByRole("CANDIDATE").subscribe((response: any) => {
+        this.requests = response;
+      } )
+    } )
   }
 
-  onRefuseMember() {
-    alert("Member Refused")
+  onRefuseMemberClick(childElement: any) {
+    this.apiService.approveOrRefuseCandidate(childElement.user.id, "refuse").subscribe((response: any) => {
+      this.apiService.getUsersByRole("CANDIDATE").subscribe((response: any) => {
+        this.requests = response;
+      } )
+    } )
   }
+
+  ngOnInit(): void {
+    this.apiService.getUsersByRole("CANDIDATE").subscribe((response: any) => {
+      this.requests = response;
+    })
+  }
+
 }

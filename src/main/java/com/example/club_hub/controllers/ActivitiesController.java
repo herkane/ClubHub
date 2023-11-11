@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/activities")
@@ -38,8 +39,9 @@ public class ActivitiesController {
 
     @PostMapping("/add")
     public Activity addActivity(@RequestBody Activity activity, @RequestParam Long userId) {
-        List<Roles> role = usersService.getUserById(userId).getRoles();
-        if (role.contains(Roles.ADMIN)) {
+        Set<Roles> roles = usersService.getUserById(userId).getRoles();
+        System.out.println(roles);
+        if (roles.contains(Roles.ADMIN)) {
             activity.setStatus("ok");
         } else {
             activity.setStatus("pending");
@@ -98,7 +100,6 @@ public class ActivitiesController {
             activity.setStatus("Refused");
             activitiesService.deleteActivity(activityId);
             return ResponseEntity.status(HttpStatus.OK).body(null);
-
         }
         return ResponseEntity.status(HttpStatus.OK).body(activitiesService.updateActivity(activity, activityId));
     }

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
@@ -44,7 +45,7 @@ public class XUsersController {
 
     @PutMapping("/licenicer")
     public XUser fireUser(@RequestBody XUser user) {
-        user.setRoles(List.of(Roles.CANDIDATE));
+        user.setRoles(Set.of(Roles.CANDIDATE));
         return usersService.addUser(user);
     }
 
@@ -58,14 +59,20 @@ public class XUsersController {
     public ResponseEntity<?> approveOrRefuseCandidate(@RequestParam Long userId, @RequestParam String action) {
         XUser user = usersService.getUserById(userId);
         if (action.equals("accept")){
-            user.setRoles(List.of(Roles.MEMBER));
+            user.replaceRole(List.of(Roles.MEMBER));
             return ResponseEntity.status(HttpStatus.OK).body(usersService.addUser(user));
         }
-        else{
-            usersService.deleteUser(userId);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+        else if (action.equals("refuse")){
+            usersService.deleteUser(user.getId());
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            user.replaceRole(List.of(Roles.CANDIDATE));
+            return ResponseEntity.status(HttpStatus.OK).body(usersService.addUser(user));
         }
-
     }
 
+    @GetMapping("/findUsersByRole")
+    public List<XUser> findUsersByRole(@RequestParam Roles role) {
+        return usersService.getUsersByRole(role);
+    }
 }

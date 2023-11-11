@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -38,6 +39,12 @@ public class UsersService implements IUsersService{
 
     @Override
     public XUser addUser(XUser user) {
+        return userRepository.save(user);
+    }
+
+    public XUser update(Long userId) {
+        XUser user = userRepository.findById(userId).get();
+        user.setRoles(Set.of(Roles.MEMBER));
         return userRepository.save(user);
     }
 
@@ -75,6 +82,11 @@ public class UsersService implements IUsersService{
         return user;
     }
 
+    @Override
+    public List<XUser> getUsersByRole(Roles role) {
+        return userRepository.findByRoles(role);
+    }
+
     public String login(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -90,7 +102,7 @@ public class UsersService implements IUsersService{
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new MyJwtException("Email is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        user.setRoles(List.of(Roles.CANDIDATE));
+        user.setRoles(Set.of(Roles.CANDIDATE));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

@@ -17,5 +17,7 @@ public interface XUserRepository extends JpaRepository<XUser, Long> {
 
     Optional<XUser> findByEmail(String email);
 
+    List<XUser> findByRoles(Roles role);
+
 
 }
