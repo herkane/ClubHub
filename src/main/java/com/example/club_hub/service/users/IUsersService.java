@@ -11,8 +11,6 @@ public interface IUsersService {
 
     XUser addUser(XUser user);
 
-    XUser updateUser(XUser user);
-
     void deleteUser(Long id);
 
     List<XUser> getAllUsers();

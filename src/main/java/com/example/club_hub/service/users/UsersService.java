@@ -42,11 +42,6 @@ public class UsersService implements IUsersService{
     }
 
     @Override
-    public XUser updateUser(XUser user) {
-        return userRepository.save(user);
-    }
-
-    @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

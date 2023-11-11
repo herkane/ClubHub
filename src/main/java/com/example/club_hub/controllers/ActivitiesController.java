@@ -5,6 +5,7 @@ import com.example.club_hub.model.Roles;
 import com.example.club_hub.model.XUser;
 import com.example.club_hub.service.activities.ActivitiesService;
 import com.example.club_hub.service.users.UsersService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -95,6 +96,9 @@ public class ActivitiesController {
         }
         else{
             activity.setStatus("Refused");
+            activitiesService.deleteActivity(activityId);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+
         }
         return ResponseEntity.status(HttpStatus.OK).body(activitiesService.updateActivity(activity, activityId));
     }

@@ -43,8 +43,17 @@ public class ClubHubApplication {
                     .phoneNumber("01234567890")
                     .password(passwordEncoder.encode("vip"))
                     .build();
+            XUser candidate = XUser
+                    .builder()
+                    .fullName("Candidate Candidate")
+                    .email("candidate@candidate.com")
+                    .roles(List.of(Roles.CANDIDATE))
+                    .phoneNumber("01234567890")
+                    .password(passwordEncoder.encode("candidate"))
+                    .build();
             userService.addUser(admin);
             userService.addUser(vip);
+            userService.addUser(candidate);
             System.out.println("admin seeded, email: " + admin.getEmail() + " password: " + admin.getPassword());
         };
     }
