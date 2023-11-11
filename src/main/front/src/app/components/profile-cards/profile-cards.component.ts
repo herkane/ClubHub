@@ -16,13 +16,20 @@ export class ProfileCardsComponent implements OnInit{
   @Output() onAcceptMember = new EventEmitter<void>();
   @Output() onRefuseMember = new EventEmitter<void>();
   @Output() onFireMember = new EventEmitter<void>();
+  @Output() promoteToVIP = new EventEmitter<void>();
   @Input() user : User = {} as User
   acceptStyle : any
   refuseStyle : any
   licencierStyle : any
   currentRole : any
+  promotionStyle: any;
 
   constructor(private sharedService: SharedService, private authService: AuthService) { }
+
+  isUserVIP(): boolean {
+    if (this.user.roles === null) return false
+    return this.user.roles.includes("VIP")
+  }
 
   ngOnInit(): void {
     this.sharedService.currentRole.subscribe(role => {
@@ -40,6 +47,9 @@ export class ProfileCardsComponent implements OnInit{
       this.licencierStyle = {
         'visibility' : ''
       }
+      this.promotionStyle = {
+        'visibility' : ''
+      }
     } else if (this.purpose === 'requests') {
       this.acceptStyle = {
         'visibility' : ''
@@ -50,9 +60,17 @@ export class ProfileCardsComponent implements OnInit{
       this.licencierStyle = {
         'display' : 'none'
       }
+      this.promotionStyle = {
+        'display' : 'none'
+      }
     }
     if (this.user.id === this.authService.user.id) {
       this.licencierStyle = {
+        'display' : 'none'
+      }
+    }
+    if (this.isUserVIP()) {
+      this.promotionStyle = {
         'display' : 'none'
       }
     }

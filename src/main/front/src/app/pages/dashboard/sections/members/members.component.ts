@@ -32,4 +32,15 @@ export class MembersComponent implements OnInit{
     })
   }
 
+  promoteToVIPClick(childElement: any) {
+    if (childElement.user.role === this.authService.user.id) {
+      return
+    }
+    this.apiService.approveOrRefuseCandidate(childElement.user.id, "promote").subscribe((response: any) => {
+      this.apiService.getUsersByRole("MEMBER").subscribe((response: any) => {
+        this.members = response;
+      } )
+    })
+
+  }
 }

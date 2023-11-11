@@ -27,6 +27,7 @@ export class SinglePostComponent implements OnInit{
       } else {
         this.activitiesService.loadActivity(this.postId).subscribe(post => {
           this.post = post;
+          console.log(this.post);
         })
       }
     })

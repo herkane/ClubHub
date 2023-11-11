@@ -56,7 +56,6 @@ export class ActivityCardComponent implements OnInit {
   isParticipatingInActivity(): boolean {
     this.activityService.isParticipating(this.activity.id, this.authService.user.id).subscribe(
       (res: boolean) => {
-        console.log(res)
         this.isParticipating = res
       }, (err) => {
         console.log("Activity not added")
@@ -84,7 +83,6 @@ export class ActivityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.isParticipatingInActivity()
-    console.log(this.activity.members)
     this.user = this.authService.user;
     this.sharedService.currentRole.subscribe(
       role => this.currentRole = role

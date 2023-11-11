@@ -5,10 +5,12 @@
            height="4000" width="4000"/>
       <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{user.fullName}}</h5>
       <span class="text-sm text-gray-500 dark:text-gray-400">{{user.email}}</span>
+      <span class="text-sm text-gray-500 dark:text-gray-400">{{user.roles}}</span>
       <div class="flex mt-4 space-x-3 md:mt-6">
         <a [ngStyle]="acceptStyle" *ngIf="currentRole === 'ADMIN'" (click)="onAcceptMember.emit()" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Accepter</a>
         <a [ngStyle]="refuseStyle" (click)="onRefuseMember.emit()" *ngIf="currentRole === 'ADMIN'" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-500 hover:bg-red-700 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Refuser</a>
         <a [ngStyle]="licencierStyle" (click)="onFireMember.emit()" *ngIf="currentRole === 'ADMIN'" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-500 hover:bg-red-700 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Licencier</a>
+        <a [ngStyle]="promotionStyle" (click)="promoteToVIP.emit()" *ngIf="currentRole === 'ADMIN'" class="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-500 hover:bg-green-700 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Mettre VIP</a>
       </div>
     </div>
   </div>

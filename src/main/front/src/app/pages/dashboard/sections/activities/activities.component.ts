@@ -19,10 +19,8 @@ export class ActivitiesComponent implements OnInit{
   onParticipateClick(childElement: ActivityCardComponent) {
     this.activityService.participate(childElement.activity.id, this.authService.user.id).subscribe(
       (res: any) => {
-        console.log(res)
         this.activityService.loadActivities('ok').subscribe((data) => {
           this.activities = data
-          console.log(this.activities)
         })
       }, (err) => {
         console.log("Activity not added")
@@ -34,11 +32,9 @@ export class ActivitiesComponent implements OnInit{
   onCancelClick(childElement: ActivityCardComponent) {
     this.activityService.cancel_participation(childElement.activity.id, this.authService.user.id).subscribe(
 (res: any) => {
-        console.log(res)
         childElement.cancel()
         this.activityService.loadActivities('ok').subscribe((data) => {
           this.activities = data
-          console.log(this.activities)
         })
       }, (err) => {
         console.log("Activity not added")
@@ -62,7 +58,6 @@ export class ActivitiesComponent implements OnInit{
     })
     this.activityService.loadActivities('ok').subscribe((data) => {
       this.activities = data
-      console.log(this.activities)
     })
   }
 }

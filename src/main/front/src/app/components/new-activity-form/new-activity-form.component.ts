@@ -34,6 +34,7 @@ export class NewActivityFormComponent implements OnInit{
       alert('invalid form')
       return
     }
+    console.log(this.addActivityGroup.value)
     this.activitiesService.addActivity(this.addActivityGroup.value, this.authService.user.id).subscribe(
       (res: any) => {
         this.router.navigate(['/dashboard']);

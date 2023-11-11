@@ -7,7 +7,7 @@ export interface ActivityInterface {
   content: string;
   members: User[];
   image: string;
-  departure_date: string;
+  departure_date: Date;
   arrival_date: string;
   participantsNumber: number;
   participantsLimit: number;

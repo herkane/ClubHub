@@ -23,23 +23,19 @@ export class SidebarNavComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
     this.sharedService.changeSection('')
-    console.log("I am on the sidebar component destroyed")
   }
 
   ngOnInit(): void {
     if (this.user?.roles?.includes('ADMIN')) {
-      console.log("This user has an Admin role")
       this.whatIsUser = 'ADMIN'
       this.sharedService.changeUserRole('ADMIN')
     } else if (this.user?.roles?.some((role: string) => role === 'VIP')) {
-      console.log("This user has a VIP role")
       this.whatIsUser = 'VIP'
       this.sharedService.changeUserRole('VIP')
       this.adminStyle = {
         'display': 'none'
       }
     } else if (this.user?.roles?.includes('MEMBER')) {
-      console.log("This user has a Member role")
       this.whatIsUser = 'member'
       this.sharedService.changeUserRole('MEMBER')
       this.vipStyle = {
@@ -49,7 +45,6 @@ export class SidebarNavComponent implements OnInit, OnDestroy{
         'display': 'none'
       }
     } else {
-      console.log("This user has a Candidate role")
       this.whatIsUser = 'VISITOR'
       this.memberStyle = {
         'display': 'none'

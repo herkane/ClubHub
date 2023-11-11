@@ -65,9 +65,14 @@ public class XUsersController {
         else if (action.equals("refuse")){
             usersService.deleteUser(user.getId());
             return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
+        } else if (action.equals("fire")){
             user.replaceRole(List.of(Roles.CANDIDATE));
             return ResponseEntity.status(HttpStatus.OK).body(usersService.addUser(user));
+        } else if (action.equals("promote")){
+            user.replaceRole(List.of(Roles.MEMBER, Roles.VIP) );
+            return ResponseEntity.status(HttpStatus.OK).body(usersService.addUser(user));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 

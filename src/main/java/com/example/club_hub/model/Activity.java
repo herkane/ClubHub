@@ -32,9 +32,9 @@ public class Activity {
     @Nullable
     private String image;
     @Nullable
-    private Date departure_date;
+    private String departure_date;
     @Nullable
-    private Date arrival_date;
+    private String arrival_date;
     @Nullable
     @ManyToMany
     private List<XUser> members = new ArrayList<>();

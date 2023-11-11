@@ -32,9 +32,9 @@ public class ActivitiesController {
         return activitiesService.getAllActivities(status);
     }
 
-    @GetMapping("/get/{id}")
-    public Activity getActivity(@PathVariable Long id) {
-        return activitiesService.getActivityById(id);
+    @GetMapping("/get")
+    public Activity getActivity(@RequestParam Long postId) {
+        return activitiesService.getActivityById(postId);
     }
 
     @PostMapping("/add")
@@ -43,6 +43,8 @@ public class ActivitiesController {
         System.out.println(roles);
         if (roles.contains(Roles.ADMIN)) {
             activity.setStatus("ok");
+        } else if (roles.contains(Roles.VIP)){
+            activity.setStatus("pending");
         } else {
             activity.setStatus("pending");
         }

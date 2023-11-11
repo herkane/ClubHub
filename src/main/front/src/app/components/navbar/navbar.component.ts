@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe((data) => {
       this.isLoggedIn = data
-      console.log(this.isLoggedIn)
     })
   }
 

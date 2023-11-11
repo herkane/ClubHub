@@ -8,7 +8,6 @@ import {ApiService} from "../../../../api.service";
 })
 export class RequestsComponent implements OnInit{
   requests: any
-  childElement: any
 
   constructor(private apiService : ApiService) {
   }

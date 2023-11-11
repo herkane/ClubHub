@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ActivityCardComponent} from "../../../../components/activity-card/activity-card.component";
 import {ActivitiesService} from "../../../../activities.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-propsitions',
@@ -8,7 +9,7 @@ import {ActivitiesService} from "../../../../activities.service";
   styleUrls: ['./propsitions.component.css']
 })
 export class PropsitionsComponent implements OnInit{
-  constructor(private activitiesService: ActivitiesService) {}
+  constructor(private activitiesService: ActivitiesService, private router: Router) {}
 
 
   propositions : any
@@ -19,8 +20,10 @@ export class PropsitionsComponent implements OnInit{
         console.log(res)
         this.activitiesService.loadActivities('pending').subscribe((data) => {
             this.propositions = data
+          if (this.propositions.length === 0) {
+            this.router.navigate(['/dashboard'])
           }
-        )
+        })
       }, (err) => {
         console.log("Activity not updated")
         console.log(err)
@@ -34,6 +37,9 @@ export class PropsitionsComponent implements OnInit{
         console.log(res)
         this.activitiesService.loadActivities('pending').subscribe((data) => {
             this.propositions = data
+            if (this.propositions.length === 0) {
+              this.router.navigate(['/dashboard'])
+            }
           }
         )
       }, (err) => {
