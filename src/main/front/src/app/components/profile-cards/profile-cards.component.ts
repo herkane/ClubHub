@@ -23,6 +23,7 @@ export class ProfileCardsComponent implements OnInit{
   licencierStyle : any
   currentRole : any
   promotionStyle: any;
+  base64Image: string | null = ''
 
   constructor(private sharedService: SharedService, private authService: AuthService) { }
 
@@ -37,6 +38,7 @@ export class ProfileCardsComponent implements OnInit{
     })
     console.log("current role")
     console.log(this.currentRole)
+    this.base64Image = this.user.image
     if (this.purpose === 'members') {
       this.acceptStyle = {
         'display' : 'none'

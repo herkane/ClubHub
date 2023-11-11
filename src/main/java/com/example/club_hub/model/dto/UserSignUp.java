@@ -12,4 +12,5 @@ public class UserSignUp {
     private String password;
     private String fullName;
     private String phoneNumber;
+    private String image;
 }

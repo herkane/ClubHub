@@ -16,7 +16,7 @@ export class SignupFormComponent {
 
   selectedFile: File | null = null
   base64image: string | null = null
-  newUser: User = {} as User
+  newUser: any
 
   @Output() actionButton = new EventEmitter<void>()
   signupForm = new FormGroup({
@@ -47,12 +47,10 @@ export class SignupFormComponent {
       alert('invalid form')
       return
     }
-    this.authService.register(this.signupForm.value).subscribe(
+    this.newUser = this.signupForm.value
+    this.newUser.image = this.base64image
+    this.authService.register(this.newUser).subscribe(
       (res: any) => {
-        if (this.base64image) {
-          //this.newUser.image = this.base64image
-          this.newUser.image = "The image works i just needed to comment it for long lines reasons"
-        }
         this.router.navigate(['/request-sent'])
       }, (err) => {
         console.log("User not created")

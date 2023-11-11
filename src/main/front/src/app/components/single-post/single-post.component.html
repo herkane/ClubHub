@@ -3,7 +3,7 @@
   <h2 class="mt-10 mb-20 text-5xl font-bold text-black">{{post.title}}</h2>
 
   <div class="flex flex-row items-start">
-    <img class="mx-32 h-auto max-w-xl rounded-lg shadow-xl dark:shadow-gray-800" src="./assets/profile.jpg" alt="image description">
+    <img class="mx-32 h-auto max-w-xl rounded-lg shadow-xl dark:shadow-gray-800" [src]="post.image || './assets/bg.jpg'" alt="image description">
     <div class="mx-48">
       <h1 class="text-3xl font-bold">By who ?</h1>
       <p class="mb-8 mt-2 text-black text-xl">{{post.author || 'ADMIN'}}</p>

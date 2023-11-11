@@ -1,7 +1,7 @@
 <div class="m-1 px-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   <div class="flex justify-end px-4 pt-4">
     <div class="flex flex-col items-center pb-10">
-      <img class="w-24 h-24 mb-3 rounded-full shadow-lg" ngSrc="./assets/profile.jpg" alt="Bonnie image"
+      <img class="w-24 h-24 mb-3 rounded-full shadow-lg" [src]="base64Image || './assets/avatar.svg'" alt="Profile pic"
            height="4000" width="4000"/>
       <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{user.fullName}}</h5>
       <span class="text-sm text-gray-500 dark:text-gray-400">{{user.email}}</span>

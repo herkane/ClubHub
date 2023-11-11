@@ -38,6 +38,7 @@ export class ActivityCardComponent implements OnInit {
   @Output() onActionButtonClick3 = new EventEmitter<void>();
   @Output() onActionButtonClick4 = new EventEmitter<void>();
   @Output() onActionButtonClick5 = new EventEmitter<void>();
+  base64image: any;
 
 
   constructor(private router : Router, private authService: AuthService, private sharedService : SharedService, private activityService : ActivitiesService) {
@@ -83,6 +84,7 @@ export class ActivityCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.base64image = this.activity.image
     this.authService.isLoggedIn$.subscribe(
       (isLoggedIn) => {
         this.isLoggedIn = isLoggedIn

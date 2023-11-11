@@ -29,6 +29,8 @@ public class Activity {
     private int participantsLimit;
     @Value("0")
     private int participantsNumber;
+
+    @Lob
     @Nullable
     private String image;
     @Nullable

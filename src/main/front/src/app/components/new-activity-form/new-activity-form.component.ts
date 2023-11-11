@@ -19,9 +19,11 @@ export class NewActivityFormComponent implements OnInit{
     participantsLimit: new FormControl(null, Validators.required),
     departure_date: new FormControl(null, Validators.required),
     arrival_date: new FormControl(null, Validators.required),
-    image: new FormControl(null),
     author: new FormControl(this.authService.user.fullName),
   });
+  selectedFile: File | null = null
+  base64image: string | null = null
+  activity: any
 
   constructor(private activitiesService: ActivitiesService, private router: Router, private sharedService: SharedService, private authService: AuthService) {
   }
@@ -34,8 +36,9 @@ export class NewActivityFormComponent implements OnInit{
       alert('invalid form')
       return
     }
-    console.log(this.addActivityGroup.value)
-    this.activitiesService.addActivity(this.addActivityGroup.value, this.authService.user.id).subscribe(
+    this.activity = this.addActivityGroup.value
+    this.activity.image = this.base64image
+    this.activitiesService.addActivity(this.activity, this.authService.user.id).subscribe(
       (res: any) => {
         this.router.navigate(['/dashboard']);
         this.sharedService.changeSection('Tableau de bord');
@@ -44,5 +47,17 @@ export class NewActivityFormComponent implements OnInit{
         console.log(err)
       }
     )
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0]
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      this.base64image = reader.result as string
+    }
+    if (this.selectedFile) {
+      reader.readAsDataURL(this.selectedFile)
+    }
   }
 }
