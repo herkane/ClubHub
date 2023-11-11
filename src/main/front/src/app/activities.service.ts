@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ActivityInterface} from "../models/activity.interface";
 
@@ -7,7 +7,7 @@ import {ActivityInterface} from "../models/activity.interface";
   providedIn: 'root'
 })
 export class ActivitiesService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = '/api';
   private mockApi = 'http://localhost:5000';
 
   constructor(private http: HttpClient) { }
@@ -22,6 +22,17 @@ export class ActivitiesService {
     const params = new HttpParams()
       .set('userId', userId)
     return this.http.post(`${this.apiUrl}/activities/add`, activityObject, {params})
+  }
+
+  approveOrRefuseActivity(id: number, status: string): Observable<any> {
+    const params = new HttpParams()
+      .set('activityId', id)
+      .set('action', status)
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT')
+    return this.http.put(`${this.apiUrl}/activities/prove-or-refuse-activity`, null, {headers, params})
   }
 
   deleteActivity(id: number): Observable<ActivityInterface[]> {
@@ -41,12 +52,12 @@ export class ActivitiesService {
     const params = new HttpParams()
       .set('id', id)
       .set('userId', userId)
-    const headers = new Headers();
+    const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT')
 
-    return this.http.put(`${this.apiUrl}/activities/cancel-participation`, null, {params})
+    return this.http.put(`${this.apiUrl}/activities/cancel-participation`, null, {headers, params})
   }
 
   loadProposition(id: number): Observable<any> {

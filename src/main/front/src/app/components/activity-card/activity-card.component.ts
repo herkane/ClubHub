@@ -33,12 +33,10 @@ export class ActivityCardComponent implements OnInit {
   @Input() purpose: string = '';
   @Input() actionButtonLabel: string = '';
   @Output() onActionButtonClick = new EventEmitter<void>();
-  @Input() actionButtonLabel2: string = '';
-  @Input() actionButtonLabel3: string = '';
-  @Input() actionButtonLabel4: string = '';
   @Output() onActionButtonClick2 = new EventEmitter<void>();
   @Output() onActionButtonClick3 = new EventEmitter<void>();
   @Output() onActionButtonClick4 = new EventEmitter<void>();
+  @Output() onActionButtonClick5 = new EventEmitter<void>();
 
 
   constructor(private router : Router, private authService: AuthService, private sharedService : SharedService, private activityService : ActivitiesService) {

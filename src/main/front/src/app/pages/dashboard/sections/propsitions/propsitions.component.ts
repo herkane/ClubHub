@@ -13,12 +13,34 @@ export class PropsitionsComponent implements OnInit{
 
   propositions : any
 
-  accept() {
-    alert("ActivityInterface Accepted")
+  accept(childElement: ActivityCardComponent) {
+    this.activitiesService.approveOrRefuseActivity(childElement.activity.id, 'accept').subscribe(
+      (res: any) => {
+        console.log(res)
+        this.activitiesService.loadActivities('pending').subscribe((data) => {
+            this.propositions = data
+          }
+        )
+      }, (err) => {
+        console.log("Activity not updated")
+        console.log(err)
+      }
+    )
   }
 
-  refuse() {
-    alert("ActivityInterface Refused")
+  refuse(childElement: ActivityCardComponent) {
+    this.activitiesService.approveOrRefuseActivity(childElement.activity.id, 'refuse').subscribe(
+      (res: any) => {
+        console.log(res)
+        this.activitiesService.loadActivities('pending').subscribe((data) => {
+            this.propositions = data
+          }
+        )
+      }, (err) => {
+        console.log("Activity not updated")
+        console.log(err)
+      }
+    )
   }
 
   ngOnInit(): void {
