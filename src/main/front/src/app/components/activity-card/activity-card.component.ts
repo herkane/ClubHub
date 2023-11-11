@@ -26,6 +26,7 @@ export class ActivityCardComponent implements OnInit {
   user: any
   currentRole: any
   isParticipating: boolean = false;
+  isLoggedIn: boolean = false;
   @Input() activity : ActivityInterface = {} as ActivityInterface;
 
 
@@ -82,79 +83,86 @@ export class ActivityCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isParticipatingInActivity()
-    this.user = this.authService.user;
-    this.sharedService.currentRole.subscribe(
-      role => this.currentRole = role
+    this.authService.isLoggedIn$.subscribe(
+      (isLoggedIn) => {
+        this.isLoggedIn = isLoggedIn
+      }
     )
-    if (!this.currentRole) {
-      this.memberStyle = {
-        'display': 'none'
-      };
-    }
-    this.currentPath = this.router.url
-    this.proposed_by = {
-      'display': 'none'
-    }
-    this.participateStyle = {
-      'display' : ''
-    }
-    this.cancelStyle = {
-      'display': 'none'
-    }
-    this.deleteStyle = {
-      'display': 'none'
-    }
-    this.propositionStyle = {
-      'display': 'none'
-    }
-    if (this.purpose === 'Delete') {
-      this.participateStyle = {
-        'display': 'none',
+    if (this.isLoggedIn) {
+      this.isParticipatingInActivity()
+      this.user = this.authService.user;
+      this.sharedService.currentRole.subscribe(
+        role => this.currentRole = role
+      )
+      if (!this.currentRole) {
+        this.memberStyle = {
+          'display': 'none'
+        };
       }
-      this.propositionStyle = {
-        'display': 'none'
-      }
-      this.deleteStyle = {
-        'visibility': ''
-      }
-      this.cancelStyle = {
-        'display': 'none'
-      }
-    } else if (this.purpose === 'Proposition') {
-      this.counterStyle = {
-        'display': 'none'
-      }
-      this.cancelStyle = {
-        'display': 'none'
-      }
+      this.currentPath = this.router.url
       this.proposed_by = {
-        'visibility': ''
+        'display': 'none'
       }
       this.participateStyle = {
+        'display' : ''
+      }
+      this.cancelStyle = {
         'display': 'none'
       }
       this.deleteStyle = {
         'display': 'none'
       }
       this.propositionStyle = {
-        'display': ''
-      }
-    } else if (this.purpose === 'Participate') {
-      this.participateStyle = {
-        'display': ''
-      }
-      this.cancelStyle = {
-        'display': ''
-      }
-      this.proposed_by = {
         'display': 'none'
       }
-      this.deleteStyle = {
-        'display': 'none'
+      if (this.purpose === 'Delete') {
+        this.participateStyle = {
+          'display': 'none',
+        }
+        this.propositionStyle = {
+          'display': 'none'
+        }
+        this.deleteStyle = {
+          'visibility': ''
+        }
+        this.cancelStyle = {
+          'display': 'none'
+        }
+      } else if (this.purpose === 'Proposition') {
+        this.counterStyle = {
+          'display': 'none'
+        }
+        this.cancelStyle = {
+          'display': 'none'
+        }
+        this.proposed_by = {
+          'visibility': ''
+        }
+        this.participateStyle = {
+          'display': 'none'
+        }
+        this.deleteStyle = {
+          'display': 'none'
+        }
+        this.propositionStyle = {
+          'display': ''
+        }
+      } else if (this.purpose === 'Participate') {
+        this.participateStyle = {
+          'display': ''
+        }
+        this.cancelStyle = {
+          'display': ''
+        }
+        this.proposed_by = {
+          'display': 'none'
+        }
+        this.deleteStyle = {
+          'display': 'none'
+        }
       }
+      this.participating = false
     }
-    this.participating = false
   }
 
 }

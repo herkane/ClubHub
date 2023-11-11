@@ -60,10 +60,6 @@ export class ActivitiesService {
     return this.http.put(`${this.apiUrl}/cancel-participation`, null, {headers, params})
   }
 
-  loadProposition(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-
   loadActivity(id: number): Observable<any> {
     const params = new HttpParams()
       .set('postId', id)

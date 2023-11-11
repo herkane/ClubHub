@@ -40,6 +40,7 @@ export class LoginFormComponent {
     }
     this.authService.login(this.loginForm.value).subscribe(
       (res: any) => {
+        this.sharedService.changeCurrentUser(this.authService.user.fullName)
         this.router.navigate(['/dashboard']);
         this.sharedService.changeSection('Tableau de bord');
       }, (err) => {

@@ -20,16 +20,10 @@ export class SinglePostComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.postId = +params['id'];
-      if (this.route.snapshot.routeConfig?.path === 'propositions/post/:id') {
-        this.activitiesService.loadProposition(this.postId).subscribe(post => {
-          this.post = post;
-        })
-      } else {
-        this.activitiesService.loadActivity(this.postId).subscribe(post => {
-          this.post = post;
-          console.log(this.post);
-        })
-      }
+      this.activitiesService.loadActivity(this.postId).subscribe(post => {
+        this.post = post;
+        console.log(this.post);
+      })
     })
   }
 }

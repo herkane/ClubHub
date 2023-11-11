@@ -1,12 +1,6 @@
-import {Component, Input, OnInit, OnDestroy, Renderer2, ElementRef} from '@angular/core';
-import {User} from "../../../models/user.interface";
-import {Observable} from "rxjs";
-import {select, Store} from "@ngrx/store";
-import * as AuthActions from '../../../models/actions/user.actions'
-import {Route, Router} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {AuthService} from "../../auth/auth.service";
-import {UserState} from "../../../models/reducers/user.reducer";
-import {loadUser, logout} from "../../../models/actions/user.actions";
 import {SharedService} from "../../SharedService";
 
 
@@ -20,19 +14,26 @@ export class NavbarComponent implements OnInit{
   @Input() title : any
   currentSection: string | undefined
   isLoggedIn: any;
+  currentUser: any;
 
   constructor(private sharedService: SharedService, private router: Router, private authService: AuthService) {
     this.sharedService.currentSection.subscribe(section => this.currentSection = section)
+    this.sharedService.currentUser.subscribe(section => this.currentUser = section)
   }
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe((data) => {
       this.isLoggedIn = data
     })
+    this.sharedService.currentUser.subscribe((data) => {
+      this.currentUser = data
+    })
+    console.log(this.currentUser)
   }
 
   goToActivities() {
     this.sharedService.changeSection('')
+    this.sharedService.changeCurrentUser('')
     this.router.navigate(['/activities'])
   }
 

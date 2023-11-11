@@ -44,12 +44,9 @@ export class ActivitiesComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log("Activities component init")
     this.authService.isLoggedIn$.subscribe((data) => {
-      if (data) {
-        this.loggedInStyle = {
-
-        }
-      } else {
+      if (!data) {
         this.loggedInStyle = {
           'justify-content': 'center',
           'margin-left': '0'

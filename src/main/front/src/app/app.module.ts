@@ -29,7 +29,6 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
 import { SinglePostComponent } from './components/single-post/single-post.component';
 import {TruncateWordsPipe} from "./truncate-word.pipe";
 import { RequestSentComponent } from './pages/request-sent/request-sent.component';
-import {FakeBackendProvider} from "./fake-backend.interceptor";
 import {AuthInterceptorProvider} from "./auth/auth.interceptor";
 import {HasRolesGuard} from "./auth/has-roles.guard";
 

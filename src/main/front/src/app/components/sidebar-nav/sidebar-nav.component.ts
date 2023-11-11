@@ -93,6 +93,7 @@ export class SidebarNavComponent implements OnInit, OnDestroy{
   logout() {
     this.authService.logout();
     this.sharedService.changeSection('')
+    this.sharedService.changeCurrentUser('')
     this.router.navigate(['/']);
   }
 }
