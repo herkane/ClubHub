@@ -86,4 +86,17 @@ public class ActivitiesController {
         activity.setMembers(members);
         return ResponseEntity.status(HttpStatus.OK).body(activitiesService.decrementActivity(activity));
     }
+
+    @PutMapping("/prove-or-refuse-activity")
+    public ResponseEntity<?> ProveOrRefuseActivity(@RequestParam Long activityId, @RequestParam String action) {
+        Activity activity = activitiesService.getActivityById(activityId);
+        if (action.equals("accept")){
+            activity.setStatus("ok");
+        }
+        else{
+            activity.setStatus("Refused");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(activitiesService.updateActivity(activity, activityId));
+    }
+
 }
