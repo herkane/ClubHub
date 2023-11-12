@@ -1,0 +1,14 @@
+
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+@	java:S1066"+Replace this use of System.out by a logger.(Óª¸™
+<
+java:S1452;"&Remove usage of generic wildcard type.(¢ž«ÿ
+a
+java:S1128"FRemove this unused import 'com.example.club_hub.model.dto.UserSignUp'.(®ßã‡úÿÿÿÿ
+c
+java:S1128"MRemove this unused import 'com.example.club_hub.service.users.IUsersService'.(ŠÔ³
+E
+java:S1068"/Remove this unused "modelMapper" private field.(Á™öþ

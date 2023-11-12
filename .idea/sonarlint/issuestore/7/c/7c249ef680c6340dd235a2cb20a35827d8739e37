@@ -1,0 +1,24 @@
+
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+E	java:S106+"+Replace this use of System.out by a logger.(ïÚïşÿÿÿÿ
+A
+java:S1452I"&Remove usage of generic wildcard type.(°•½¼ÿÿÿÿÿ
+H
+java:S1135G"2Complete the task associated to this TODO comment.(ğæùˆ
+h	java:S100V"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥ËÓ¤ûÿÿÿÿ
+A
+java:S1452V"&Remove usage of generic wildcard type.(¥ËÓ¤ûÿÿÿÿ
+M
+java:S1135T"2Complete the task associated to this TODO comment.(ù¿äœøÿÿÿÿ
+h	java:S100`"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§·Éáşÿÿÿÿ
+A
+java:S1452`"&Remove usage of generic wildcard type.(§·Éáşÿÿÿÿ
+J
+java:S1128"5Remove this unused import 'org.apache.catalina.User'.(›ân
+p
+java:S1128"URemove this unused import 'org.springframework.security.access.prepost.PreAuthorize'.(ˆ†×ùÿÿÿÿ
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ

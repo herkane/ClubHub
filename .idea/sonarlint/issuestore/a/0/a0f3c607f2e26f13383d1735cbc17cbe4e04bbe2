@@ -1,0 +1,12 @@
+
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+m
+java:S3305"RInject this field value directly into "filterChain", the only method that uses it.(£šÈÙûÿÿÿÿ
+B
+java:S1602!",Remove useless curly braces around statement(Ğ ¢¤
+V	java:S125""<This block of commented-out lines of code should be removed.(»á¹·ûÿÿÿÿ
+V
+java:S1128";Remove this unused import 'lombok.RequiredArgsConstructor'.(ÑØúøÿÿÿÿ
+v
+java:S1128"`Remove this unused import 'org.springframework.security.web.util.matcher.AntPathRequestMatcher'.(¼¸ö

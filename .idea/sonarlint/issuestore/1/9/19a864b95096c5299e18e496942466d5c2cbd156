@@ -1,0 +1,14 @@
+
+a
+java:S1192#"LDefine a constant instead of duplicating this literal "01234567890" 3 times.(æô¢9
+Q
+java:S6437$"6Revoke and change this password, as it is compromised.(‹ÇôÍøÿÿÿÿ
+L
+java:S6437-"6Revoke and change this password, as it is compromised.(ê±ƒë
+L
+java:S64375"6Revoke and change this password, as it is compromised.(ÀÂº
+?	java:S106:"+Replace this use of System.out by a logger.(ÒÀÙ
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+F
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
