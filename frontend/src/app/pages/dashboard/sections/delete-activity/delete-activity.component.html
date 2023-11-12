@@ -1,0 +1,3 @@
+<div class=" flex flex-row flex-wrap ml-64">
+  <app-activity-card [routeLink]="'../delete-activity'" [activity]="index" [purpose]="'Delete'" (onActionButtonClick4)="onDeleteClick(childElement)" *ngFor="let index of activities" #childElement></app-activity-card>
+</div>

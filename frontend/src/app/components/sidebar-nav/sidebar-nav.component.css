@@ -1,0 +1,11 @@
+.sidebar {
+  background: #030128;
+}
+
+li > a, span {
+  color: #fff;
+}
+
+ul:hover > li:hover > a {
+  color: black;
+}

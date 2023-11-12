@@ -1,0 +1,23 @@
+<div class="flex items-center flex-col flex-wrap ml-64" *ngIf="post">
+
+  <h2 class="mt-10 mb-20 text-5xl font-bold text-black">{{post.title}}</h2>
+
+  <div class="flex flex-row items-start">
+    <img class="mx-32 h-auto max-w-xl rounded-lg shadow-xl dark:shadow-gray-800" [src]="post.image || './assets/bg.jpg'" alt="image description">
+    <div class="mx-48">
+      <h1 class="text-3xl font-bold">By who ?</h1>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.author || 'ADMIN'}}</p>
+      <h1 class="text-3xl font-bold">From when ?</h1>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.departure_date || "I don't know"}}</p>
+      <h1 class="text-3xl font-bold">Until when ?</h1>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.arrival_date || "I don't know"}}</p>
+      <h1 class="text-3xl font-bold">How many are allowed ?</h1>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.participantsLimit || "A lot of"}} people</p>
+      <h1 class="text-3xl font-bold">How many are going so far ?</h1>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.participantsNumber}} people</p>
+      <h1 class="text-3xl font-bold">What is this about ?</h1>
+      <p class="mb-8 mt-2 text-black text-xl">{{post.content || "I don't know, but it's gonna be fun"}}</p>
+    </div>
+  </div>
+
+</div>

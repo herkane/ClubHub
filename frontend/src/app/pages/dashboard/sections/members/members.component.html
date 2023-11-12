@@ -1,0 +1,3 @@
+<div class="ml-64 mt-2 flex flex-row flex-wrap">
+  <app-profile-cards (onFireMember)="onFireMember(childElement)" (promoteToVIP)="promoteToVIPClick(childElement)" [user]="index" [purpose]="'members'" *ngFor="let index of members" #childElement></app-profile-cards>
+</div>
