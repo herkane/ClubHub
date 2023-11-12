@@ -1,0 +1,3 @@
+<div class="flex flex-row flex-wrap ml-64" [style]="loggedInStyle">
+  <app-activity-card [routeLink]="'../dashboard'" [activity]="index" [purpose]="'Participate'" (onActionButtonClick3)="onCancelClick(childElement)" (onActionButtonClick)="onParticipateClick(childElement)" *ngFor="let index of activities" #childElement></app-activity-card>
+</div>

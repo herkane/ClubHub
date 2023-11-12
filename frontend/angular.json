@@ -52,6 +52,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+
             }
           },
           "defaultConfiguration": "production"
@@ -63,7 +64,8 @@
               "browserTarget": "angular-club-hub:build:production"
             },
             "development": {
-              "browserTarget": "angular-club-hub:build:development"
+              "browserTarget": "angular-club-hub:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
