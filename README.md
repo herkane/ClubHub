@@ -6,12 +6,12 @@ For more info about us, see the [Contact.md file](Contact.md)
 
 ## Class diagram
 
-![Class diagram](Class Diagram.png)
+![Class diagram](class.png)
 
 
 ## Use case diagram
 
-![Use case diagram](Use Case.png)
+![Use case diagram](usecase.png)
 
 ## Sequence diagram
 
