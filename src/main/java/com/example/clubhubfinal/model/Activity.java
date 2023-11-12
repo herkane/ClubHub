@@ -38,6 +38,6 @@ public class Activity {
     @Nullable
     private String arrival_date;
     @Nullable
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private List<XUser> members = new ArrayList<>();
 }

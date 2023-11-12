@@ -3,6 +3,7 @@ package com.example.clubhubfinal.service.users;
 import com.example.clubhubfinal.model.Roles;
 import com.example.clubhubfinal.model.XUser;
 import com.example.clubhubfinal.model.dto.UserSignUp;
+import com.example.clubhubfinal.repository.ActivitiesRepository;
 import com.example.clubhubfinal.repository.XUserRepository;
 import com.example.clubhubfinal.security.JwtProvider;
 import com.example.clubhubfinal.security.MyJwtException;
@@ -28,6 +29,9 @@ public class UsersService implements IUsersService{
     private XUserRepository userRepository;
 
     @Autowired
+    private ActivitiesRepository activitiesRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -50,6 +54,14 @@ public class UsersService implements IUsersService{
 
     @Override
     public void deleteUser(Long id) {
+        XUser user = userRepository.findById(id).get();
+        activitiesRepository.findAll().forEach(activity -> {
+            if(activity.getMembers().contains(user)){
+                activity.getMembers().remove(user);
+                activity.setParticipantsNumber(activity.getParticipantsNumber() - 1);
+                activitiesRepository.save(activity);
+            }
+        });
         userRepository.deleteById(id);
     }
 

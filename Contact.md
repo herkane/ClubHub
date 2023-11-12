@@ -1,11 +1,16 @@
-# AngularClubHub
+# Contact
 
-## Class diagram
+## Contributor 1
 
-![Class diagram](bg.jpg)
+- **Prénom** : `Achraf`
+- **Nom** : `HERKANE`
+- **Email** : `achraf.herkane@etu.univ-amu.fr`
 
-## Use case diagram
+## Contributor 2
 
-![Use case diagram](bg.jpg)
+- **Prénom** : `Hamza`
+- **Nom** : `YAICH`
+- **Email** : `hamza.yaich@etu.univ-amu.fr`
+
 
 
